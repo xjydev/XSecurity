@@ -23,9 +23,9 @@
 #define kBanderAdId @"ca-app-pub-2119163618927307/2059270754"
 #define kAppleId @"1469851328"
 //程序需要的主要三个颜色
-#define kNavCOLOR [UIColor ora_colorWithHex:0xf5f5f5]
-#define kMainCOLOR [UIColor ora_colorWithHex:0x0DB8F6]
-#define kBACKCOLOR [UIColor ora_colorWithHex:0xeeeeee]
+#define kGray1Color [UIColor ora_darkColorWithHex:0xf1f1f1 andAlpha:1];
+#define kMainCOLOR [UIColor ora_colorWithHex:0xFFD700]
+#define kBACKCOLOR [UIColor ora_colorWithHex:0x000000]
 #define kLINECOLOR [UIColor ora_colorWithHex:0xe5e5e5]
 #define kTEXTGRAY [UIColor ora_colorWithHex:0x999999]
 #define kSELECTCOLOR [UIColor ora_colorWithHex:0x0E80FF]

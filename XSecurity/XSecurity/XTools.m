@@ -134,6 +134,22 @@ static XTools *tools = nil;
     }
     return _activityLabel;
 }
+- (UILabel *)alertLabel {
+    if (!_alertLabel) {
+        _alertLabel = [[UILabel alloc]init];
+        _alertLabel.bounds = CGRectMake(0, 0, 100, 40);
+        _alertLabel.textAlignment = NSTextAlignmentCenter;
+        _alertLabel.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.75];
+        _alertLabel.textColor = [UIColor whiteColor];
+        _alertLabel.layer.cornerRadius = 10;
+        _alertLabel.layer.masksToBounds = YES;
+        _alertLabel.hidden = YES;
+        //        AppDelegate *app =(AppDelegate *)[UIApplication sharedApplication];
+        _alertLabel.center = [UIApplication sharedApplication].keyWindow.center;
+        [[UIApplication sharedApplication].keyWindow addSubview:_alertLabel];
+    }
+    return _alertLabel;
+}
 - (void)hiddAlertLabel {
     [UIView animateWithDuration:0.2 animations:^{
         self.alertLabel.alpha = 0;

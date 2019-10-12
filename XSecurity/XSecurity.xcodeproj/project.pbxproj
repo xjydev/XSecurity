@@ -12,14 +12,21 @@
 		6C1476B423502B7F00F65E39 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1476B123502B7F00F65E39 /* LeftViewController.m */; };
 		6C1476B723502D7000F65E39 /* XTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1476B623502D7000F65E39 /* XTools.m */; };
 		6C1476BA23502F7600F65E39 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1476B823502F7600F65E39 /* UIColor+Hex.m */; };
+		6C1476BE235061F700F65E39 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1476BD235061F700F65E39 /* DetailViewController.m */; };
+		6C1476C12350623F00F65E39 /* SecurityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1476C02350623F00F65E39 /* SecurityModel.mm */; };
+		6C1476C62350650E00F65E39 /* XDataBaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1476C52350650E00F65E39 /* XDataBaseManager.mm */; };
+		6C1476C923506B5A00F65E39 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1476C823506B5A00F65E39 /* MainTableViewController.m */; };
 		6C288CBB2325F2AF00880912 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CBA2325F2AF00880912 /* AppDelegate.m */; };
-		6C288CBE2325F2AF00880912 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CBD2325F2AF00880912 /* MainViewController.m */; };
 		6C288CC12325F2AF00880912 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C288CBF2325F2AF00880912 /* Main.storyboard */; };
 		6C288CC62325F2B000880912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C288CC52325F2B000880912 /* Assets.xcassets */; };
 		6C288CC92325F2B000880912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C288CC72325F2B000880912 /* LaunchScreen.storyboard */; };
 		6C288CCC2325F2B000880912 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CCB2325F2B000880912 /* main.m */; };
 		6C288CD62325F2B000880912 /* XSecurityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CD52325F2B000880912 /* XSecurityTests.m */; };
 		6C288CE12325F2B000880912 /* XSecurityUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CE02325F2B000880912 /* XSecurityUITests.m */; };
+		6CFED92C2351C1BD00658B45 /* SelectImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED92B2351C1BD00658B45 /* SelectImageViewController.m */; };
+		6CFED9342351E1DC00658B45 /* SafeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED92F2351E1DC00658B45 /* SafeView.m */; };
+		6CFED9352351E1DC00658B45 /* CLLockItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED9302351E1DC00658B45 /* CLLockItemView.m */; };
+		6CFED9362351E1DC00658B45 /* CoreLockConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED9312351E1DC00658B45 /* CoreLockConst.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,11 +56,18 @@
 		6C1476B823502F7600F65E39 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		6C1476B923502F7600F65E39 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		6C1476BB23502FBD00F65E39 /* XMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMacro.h; sourceTree = "<group>"; };
+		6C1476BC235061F700F65E39 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		6C1476BD235061F700F65E39 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		6C1476BF2350623F00F65E39 /* SecurityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecurityModel.h; sourceTree = "<group>"; };
+		6C1476C02350623F00F65E39 /* SecurityModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SecurityModel.mm; sourceTree = "<group>"; };
+		6C1476C22350644B00F65E39 /* SecurityModel+WCTTableCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SecurityModel+WCTTableCoding.h"; sourceTree = "<group>"; };
+		6C1476C42350650E00F65E39 /* XDataBaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDataBaseManager.h; sourceTree = "<group>"; };
+		6C1476C52350650E00F65E39 /* XDataBaseManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = XDataBaseManager.mm; sourceTree = "<group>"; };
+		6C1476C723506B5A00F65E39 /* MainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		6C1476C823506B5A00F65E39 /* MainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		6C288CB62325F2AF00880912 /* XSecurity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XSecurity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C288CB92325F2AF00880912 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C288CBA2325F2AF00880912 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6C288CBC2325F2AF00880912 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		6C288CBD2325F2AF00880912 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		6C288CC02325F2AF00880912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C288CC52325F2B000880912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C288CC82325F2B000880912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +79,14 @@
 		6C288CDC2325F2B000880912 /* XSecurityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XSecurityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C288CE02325F2B000880912 /* XSecurityUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XSecurityUITests.m; sourceTree = "<group>"; };
 		6C288CE22325F2B000880912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CFED92A2351C1BD00658B45 /* SelectImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectImageViewController.h; sourceTree = "<group>"; };
+		6CFED92B2351C1BD00658B45 /* SelectImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectImageViewController.m; sourceTree = "<group>"; };
+		6CFED92E2351E1DC00658B45 /* CoreLockConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLockConst.h; sourceTree = "<group>"; };
+		6CFED92F2351E1DC00658B45 /* SafeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafeView.m; sourceTree = "<group>"; };
+		6CFED9302351E1DC00658B45 /* CLLockItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockItemView.m; sourceTree = "<group>"; };
+		6CFED9312351E1DC00658B45 /* CoreLockConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLockConst.m; sourceTree = "<group>"; };
+		6CFED9322351E1DC00658B45 /* SafeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeView.h; sourceTree = "<group>"; };
+		6CFED9332351E1DC00658B45 /* CLLockItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockItemView.h; sourceTree = "<group>"; };
 		7B92FBB0BA644CE45B91B32D /* Pods-XSecurity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XSecurity.release.xcconfig"; path = "Pods/Target Support Files/Pods-XSecurity/Pods-XSecurity.release.xcconfig"; sourceTree = "<group>"; };
 		DB84FEABC76DD9DDB7E5ED6A /* Pods-XSecurity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XSecurity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XSecurity/Pods-XSecurity.debug.xcconfig"; sourceTree = "<group>"; };
 		E6365F7350329D9DAAB957EB /* libPods-XSecurity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XSecurity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +135,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6C1476C3235064D800F65E39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C1476BF2350623F00F65E39 /* SecurityModel.h */,
+				6C1476C02350623F00F65E39 /* SecurityModel.mm */,
+				6C1476C22350644B00F65E39 /* SecurityModel+WCTTableCoding.h */,
+				6C1476C42350650E00F65E39 /* XDataBaseManager.h */,
+				6C1476C52350650E00F65E39 /* XDataBaseManager.mm */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6C288CAD2325F2AF00880912 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +172,8 @@
 		6C288CB82325F2AF00880912 /* XSecurity */ = {
 			isa = PBXGroup;
 			children = (
+				6CFED92D2351E1DC00658B45 /* Safe */,
+				6C1476C3235064D800F65E39 /* Model */,
 				6C1476B923502F7600F65E39 /* UIColor+Hex.h */,
 				6C1476B823502F7600F65E39 /* UIColor+Hex.m */,
 				6C1476BB23502FBD00F65E39 /* XMacro.h */,
@@ -149,8 +185,12 @@
 				6C1476AF23502B7F00F65E39 /* DrawerViewController.m */,
 				6C1476B223502B7F00F65E39 /* LeftViewController.h */,
 				6C1476B123502B7F00F65E39 /* LeftViewController.m */,
-				6C288CBC2325F2AF00880912 /* MainViewController.h */,
-				6C288CBD2325F2AF00880912 /* MainViewController.m */,
+				6C1476C723506B5A00F65E39 /* MainTableViewController.h */,
+				6C1476C823506B5A00F65E39 /* MainTableViewController.m */,
+				6C1476BC235061F700F65E39 /* DetailViewController.h */,
+				6C1476BD235061F700F65E39 /* DetailViewController.m */,
+				6CFED92A2351C1BD00658B45 /* SelectImageViewController.h */,
+				6CFED92B2351C1BD00658B45 /* SelectImageViewController.m */,
 				6C288CBF2325F2AF00880912 /* Main.storyboard */,
 				6C288CC52325F2B000880912 /* Assets.xcassets */,
 				6C288CC72325F2B000880912 /* LaunchScreen.storyboard */,
@@ -176,6 +216,19 @@
 				6C288CE22325F2B000880912 /* Info.plist */,
 			);
 			path = XSecurityUITests;
+			sourceTree = "<group>";
+		};
+		6CFED92D2351E1DC00658B45 /* Safe */ = {
+			isa = PBXGroup;
+			children = (
+				6CFED9332351E1DC00658B45 /* CLLockItemView.h */,
+				6CFED9302351E1DC00658B45 /* CLLockItemView.m */,
+				6CFED92E2351E1DC00658B45 /* CoreLockConst.h */,
+				6CFED9312351E1DC00658B45 /* CoreLockConst.m */,
+				6CFED9322351E1DC00658B45 /* SafeView.h */,
+				6CFED92F2351E1DC00658B45 /* SafeView.m */,
+			);
+			path = Safe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,13 +383,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C288CBE2325F2AF00880912 /* MainViewController.m in Sources */,
+				6C1476C923506B5A00F65E39 /* MainTableViewController.m in Sources */,
 				6C288CCC2325F2B000880912 /* main.m in Sources */,
+				6C1476C12350623F00F65E39 /* SecurityModel.mm in Sources */,
+				6CFED9342351E1DC00658B45 /* SafeView.m in Sources */,
 				6C1476B723502D7000F65E39 /* XTools.m in Sources */,
+				6CFED92C2351C1BD00658B45 /* SelectImageViewController.m in Sources */,
+				6C1476BE235061F700F65E39 /* DetailViewController.m in Sources */,
 				6C1476B423502B7F00F65E39 /* LeftViewController.m in Sources */,
 				6C1476BA23502F7600F65E39 /* UIColor+Hex.m in Sources */,
+				6C1476C62350650E00F65E39 /* XDataBaseManager.mm in Sources */,
 				6C1476B323502B7F00F65E39 /* DrawerViewController.m in Sources */,
+				6CFED9352351E1DC00658B45 /* CLLockItemView.m in Sources */,
 				6C288CBB2325F2AF00880912 /* AppDelegate.m in Sources */,
+				6CFED9362351E1DC00658B45 /* CoreLockConst.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

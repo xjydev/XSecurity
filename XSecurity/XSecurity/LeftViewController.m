@@ -22,8 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.mainArray =@[@[@{@"image":@"left_history",@"title":@"历史记录",@"tag":@(6)},@{@"image":@"left_setting",@"title":@"应用设置",@"tag":@(1)},@{@"image":@"left_detail",@"title":@"应用详情",@"tag":@(2)}],@[@{@"image":@"left_pay",@"title":@"订阅会员",@"tag":@(7)},@{@"image":@"left_share",@"title":@"分享好友",@"tag":@(3)},@{@"image":@"left_feedback",@"title":@"意见反馈",@"tag":@(4)},@{@"image":@"left_comment",@"title":@"给个好评",@"tag":@(5)},],];
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 100)];
+    self.mainArray =@[@[@{@"image":@"left_history",@"title":@"人脸解锁",@"tag":@(1)},@{@"image":@"left_setting",@"title":@"手势解锁",@"tag":@(2)},@{@"image":@"left_detail",@"title":@"重置解锁",@"tag":@(3)}],@[@{@"image":@"left_pay",@"title":@"关于应用",@"tag":@(4)},@{@"image":@"left_share",@"title":@"应用好评",@"tag":@(5)},@{@"image":@"left_feedback",@"title":@"意见反馈",@"tag":@(6)},],];
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 64)];
     [headerView addSubview:self.sizeLabel];
     self.tableView.tableHeaderView = headerView;
     self.tableView.tableFooterView = [[UIView alloc]init];
@@ -57,10 +57,13 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSDictionary *dict = self.mainArray[indexPath.section][indexPath.row];
-    cell.textLabel.text =dict[@"title"];
-    [cell.imageView setImage:[UIImage imageNamed:dict[@"image"]]];
+    UIImageView *imageView = [cell.contentView viewWithTag:300];
+    UILabel *titleLabel = [cell.contentView viewWithTag:301];
+    UISegmentedControl *segment = [cell viewWithTag:302];
+    titleLabel.text =dict[@"title"];
+    [imageView setImage:[UIImage imageNamed:dict[@"image"]]];
+    segment.hidden = NO;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
