@@ -35,14 +35,14 @@
     [self setUpViews];
 }
 - (void)setUpViews {
-    self.nameTextField.leftView = [self createLeftLabellWithText:@"名称:"];
+    self.nameTextField.leftView = [self createLeftLabellWithText:@"  名称:  "];
     self.nameTextField.leftViewMode = UITextFieldViewModeAlways;
     self.nameTextField.backgroundColor = kGray1Color;
-    self.accountTextField.leftView = [self createLeftLabellWithText:@"账号:"];
+    self.accountTextField.leftView = [self createLeftLabellWithText:@"  账号:  "];
     self.accountTextField.leftViewMode = UITextFieldViewModeAlways;
     self.accountTextField.backgroundColor = kGray1Color;
     
-    self.passwordTextField.leftView = [self createLeftLabellWithText:@"密码:"];
+    self.passwordTextField.leftView = [self createLeftLabellWithText:@"  密码:  "];
     self.passwordTextField.backgroundColor = kGray1Color;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     
@@ -68,7 +68,7 @@
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 44)];
     label.text = text;
     label.font = [UIFont systemFontOfSize:17];
-    label.textColor = kBACKCOLOR;
+    label.textColor = kDarkCOLOR(0x000000);
     label.textAlignment = NSTextAlignmentCenter;
     return label;
 }
@@ -86,7 +86,7 @@
     selectVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     selectVC.popoverPresentationController.delegate = self;
     selectVC.popoverPresentationController.backgroundColor = [UIColor whiteColor];
-    selectVC.preferredContentSize = CGSizeMake(225, 225);
+    selectVC.preferredContentSize = CGSizeMake(250, 250);
     @weakify(self);
     selectVC.selectedBack = ^(NSInteger index) {
         @strongify(self);
@@ -119,6 +119,10 @@
              BOOL result = [[XDataBaseManager defaultManager]updateSecurityModel:self.model];
                 if (result) {
                     [XTOOLS showMessage:@"更新成功"];
+                    if (self.completeBack) {
+                        self.completeBack(1);
+                    }
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
                 else {
                     [XTOOLS showMessage:@"更新失败"];
@@ -140,7 +144,11 @@
                 NSLog(@"mo == %@",mo);
                 BOOL result = [[XDataBaseManager defaultManager]saveSecurityModel:mo];
                 if (result) {
+                    if (self.completeBack) {
+                        self.completeBack(1);
+                    }
                     [XTOOLS showMessage:@"保存成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
                 else {
                     [XTOOLS showMessage:@"保存失败"];

@@ -9,6 +9,7 @@
 #import "DrawerViewController.h"
 #import <StoreKit/StoreKit.h>
 #import <MessageUI/MessageUI.h>
+#import "AppInfoTableViewController.h"
 #import "XTools.h"
 
 @interface DrawerViewController ()<MFMailComposeViewControllerDelegate>
@@ -119,41 +120,23 @@
 - (void)leftViewDidSelectedtag:(NSInteger )tag {
     UINavigationController *Nav = (UINavigationController *)self.mainVC;
     switch (tag) {
-        case 1: {
-           
-        }
-            break;
-        case 2: {
-           
-        }
-            break;
-        case 3://分享好友
+        case 4://关于
         {
-           
+            AppInfoTableViewController *info = [[AppInfoTableViewController alloc]init];
+            [Nav pushViewController:info animated:YES];
         }
             break;
-        case 4:
+        case 5://好评
+        {
+            NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?action=write-review",kAppleId];
+            [XTOOLS openURLStr:str];
+        }
+            break;
+        case 6://反馈
         {
             [self gotoSendMail];
         }
             break;
-        case 5:
-        {
-//            NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?action=write-review",kAppleId];
-//            [XTOOLS openURLStr:str];
-        }
-            break;
-        case 6:
-        {
-            
-        }
-            break;
-        case 7:
-        {
-           
-        }
-            break;
-            
         default:
             break;
     }
@@ -168,7 +151,7 @@
         NSArray *sendToPerson = @[@"xiaodeve@163.com"];
         [mailVC setToRecipients:sendToPerson];
         //  主题
-        [mailVC setSubject:@"简单播放意见反馈"];
+        [mailVC setSubject:@"《密保》意见反馈"];
         [self presentViewController:mailVC animated:YES completion:nil];
         [mailVC setMessageBody:@"填写您想要反馈的问题……" isHTML:NO];
     }else{

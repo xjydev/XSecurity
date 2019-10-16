@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SecurityModel.h"
 #define KTableName @"securitymodel"
-
+#define kENKEY @"key678xiao132"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XDataBaseManager : NSObject

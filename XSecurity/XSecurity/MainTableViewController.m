@@ -23,13 +23,26 @@
 @implementation MainTableViewCell
 - (void)setModel:(SecurityModel *)model {
     _model = model;
-    self.iconImageView.backgroundColor = kGray1Color;
+    NSString *imagestr = model.icon;
+    if (imagestr.length == 0) {
+        imagestr = @"ximage_0";
+    }
+    [self.iconImageView setImage:[UIImage imageNamed:imagestr]];
     self.showButton.selected = NO;
     self.nameLabel.text = model.name;
-    self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",model.account,[self showPassword:self.showButton.selected]];
+    if (_model.passWord.length == 0) {
+       self.contentLabel.text = [NSString stringWithFormat:@"%@:密码处于加密状态",model.account];
+    }
+    else {
+       self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",model.account,[self showPassword:self.showButton.selected]];
+    }
+   
 }
 - (IBAction)showButtonAction:(UIButton *)sender {
     sender.selected = !sender.selected;
+    if (self.model.passWord.length == 0) {
+        self.model.passWord = [XTOOLS decryptAes256WithData:self.model.passwordData Key:kENKEY];
+    }
   self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",self.model.account,[self showPassword:self.showButton.selected]];
 }
 
@@ -62,8 +75,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"12" style:UIBarButtonItemStyleDone target:self action:@selector(leftBarButtonItemAction)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSecurityAction)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStyleDone target:self action:@selector(leftBarButtonItemAction)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add"] style:UIBarButtonItemStyleDone target:self action:@selector(addSecurityAction)];
     self.tableView.tableFooterView = [[UIView alloc]init];
     [self refreshTableView];
     UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
@@ -72,6 +85,12 @@
         self.tableView.refreshControl = refresh;
     } else {
         [self.tableView addSubview:refresh];
+    }
+    [self performSelector:@selector(showAlert) withObject:nil afterDelay:0.5];
+}
+- (void)showAlert {
+   if (self.mainArray.count == 0) {
+        [self performSegueWithIdentifier:@"AlertViewController" sender:nil];
     }
 }
 - (void)addSecurityAction {
@@ -136,6 +155,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"DetailViewController"]) {
         DetailViewController *detail = segue.destinationViewController;
+        @weakify(self);
+        detail.completeBack = ^(NSInteger status) {
+            @strongify(self);
+            [self refreshTableView];
+        };
         detail.model = sender;
     }
 }

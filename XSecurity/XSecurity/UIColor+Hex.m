@@ -13,6 +13,7 @@
     int r = (hex >> 16) & 0xFF;
     int g = (hex >> 8) & 0xFF;
     int b = (hex)&0xFF;
+
     return [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:alpha];
 }
 + (UIColor *)ora_darkColorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha {
@@ -23,7 +24,10 @@
        if (@available(iOS 13.0, *)) {
         return   [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                   return [UIColor colorWithRed:(255.0 - r)/ 255.0f green:(255.0 - g) / 255.0f blue:(255.0 - b) / 255.0f alpha:alpha];;
+                   int dr = (255 - r);
+                   int dg = (255 - g);
+                   int db = (255 - b);
+                   return [UIColor colorWithRed:dr/ 255.0f green: dg / 255.0f blue:db / 255.0f alpha:alpha];;
                }
                else {
                    return [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:alpha];
@@ -35,7 +39,21 @@
 + (UIColor *)ora_colorWithHex:(UInt32)hex {
     return [self ora_colorWithHex:hex andAlpha:1.0];
 }
-
++ (UIColor *)ora_colorWithHex:(UInt32)hex darkHex:(UInt32)darkHex {
+    if (darkHex) {
+        if (@available(iOS 13.0, *)) {
+         return   [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                    return [UIColor ora_colorWithHex:darkHex];
+                }
+                else {
+                    return [UIColor ora_colorWithHex:hex];
+                }
+            }];
+        }
+    }
+    return [UIColor ora_colorWithHex:hex];
+}
 + (UIColor *)ora_colorWithHexString:(NSString *)hexString{
     
     unsigned int alpha, red, green, blue;

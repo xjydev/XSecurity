@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface SecurityModel : NSObject
 @property (nonatomic, copy) NSString     *name;//密码名称
 @property (nonatomic, copy) NSString     *icon;//密码图标
 @property (nonatomic, copy) NSString     *account;//账号名称
 @property (nonatomic, copy) NSString     *passWord;//密码
+@property (nonatomic, strong)NSData      *passwordData;//密码加密
 @property (nonatomic, copy) NSString     *remark;//备注
 @property (nonatomic, strong) NSDate     *createDate;//创建时间
 @property (nonatomic, strong) NSDate     *modifyDate;//修改时间
@@ -22,4 +21,3 @@ NS_ASSUME_NONNULL_BEGIN
 @property  (nonatomic, assign)NSInteger   securityId;//密码id
 @end
 
-NS_ASSUME_NONNULL_END

@@ -341,8 +341,7 @@ static XTools *tools = nil;
 - (NSString *)getPravicyPassWord {
     NSData *aesD = [kUSerD objectForKey:kPassWoed];
     if (aesD) {
-        NSData *strD = [self decryptAes256WithData:aesD Key:@"xjy12"];
-        return [[NSString alloc]initWithData:strD encoding:NSUTF8StringEncoding];
+      return [self decryptAes256WithData:aesD Key:@"xjy12"];
    
     }
     else
@@ -376,7 +375,7 @@ static XTools *tools = nil;
 }
 
 
-- (NSData *)decryptAes256WithData:(NSData *)decryptData Key:(NSString *)key   //解密
+- (NSString *)decryptAes256WithData:(NSData *)decryptData Key:(NSString *)key   //解密
 {
     char keyPtr[kCCKeySizeAES256+1];
     bzero(keyPtr, sizeof(keyPtr));
@@ -393,7 +392,8 @@ static XTools *tools = nil;
                                           buffer, bufferSize,
                                           &numBytesDecrypted);
     if (cryptStatus == kCCSuccess) {
-        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+        NSData *sData = [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+        return  [[NSString alloc]initWithData:sData encoding:NSUTF8StringEncoding];
         
     }
     free(buffer);

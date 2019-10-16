@@ -23,6 +23,8 @@
 		6C288CCC2325F2B000880912 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CCB2325F2B000880912 /* main.m */; };
 		6C288CD62325F2B000880912 /* XSecurityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CD52325F2B000880912 /* XSecurityTests.m */; };
 		6C288CE12325F2B000880912 /* XSecurityUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CE02325F2B000880912 /* XSecurityUITests.m */; };
+		6C6F609A23570A5F0064A83D /* AppInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6F609923570A5F0064A83D /* AppInfoTableViewController.m */; };
+		6C6F609D235727E20064A83D /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6F609C235727E20064A83D /* AlertViewController.m */; };
 		6CFED92C2351C1BD00658B45 /* SelectImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED92B2351C1BD00658B45 /* SelectImageViewController.m */; };
 		6CFED9342351E1DC00658B45 /* SafeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED92F2351E1DC00658B45 /* SafeView.m */; };
 		6CFED9352351E1DC00658B45 /* CLLockItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED9302351E1DC00658B45 /* CLLockItemView.m */; };
@@ -65,7 +67,7 @@
 		6C1476C52350650E00F65E39 /* XDataBaseManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = XDataBaseManager.mm; sourceTree = "<group>"; };
 		6C1476C723506B5A00F65E39 /* MainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		6C1476C823506B5A00F65E39 /* MainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
-		6C288CB62325F2AF00880912 /* XSecurity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XSecurity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C288CB62325F2AF00880912 /* 密保.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "密保.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C288CB92325F2AF00880912 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C288CBA2325F2AF00880912 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6C288CC02325F2AF00880912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +81,10 @@
 		6C288CDC2325F2B000880912 /* XSecurityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XSecurityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C288CE02325F2B000880912 /* XSecurityUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XSecurityUITests.m; sourceTree = "<group>"; };
 		6C288CE22325F2B000880912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C6F609823570A5F0064A83D /* AppInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppInfoTableViewController.h; sourceTree = "<group>"; };
+		6C6F609923570A5F0064A83D /* AppInfoTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppInfoTableViewController.m; sourceTree = "<group>"; };
+		6C6F609B235727E20064A83D /* AlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		6C6F609C235727E20064A83D /* AlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
 		6CFED92A2351C1BD00658B45 /* SelectImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectImageViewController.h; sourceTree = "<group>"; };
 		6CFED92B2351C1BD00658B45 /* SelectImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectImageViewController.m; sourceTree = "<group>"; };
 		6CFED92E2351E1DC00658B45 /* CoreLockConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLockConst.h; sourceTree = "<group>"; };
@@ -162,7 +168,7 @@
 		6C288CB72325F2AF00880912 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C288CB62325F2AF00880912 /* XSecurity.app */,
+				6C288CB62325F2AF00880912 /* 密保.app */,
 				6C288CD12325F2B000880912 /* XSecurityTests.xctest */,
 				6C288CDC2325F2B000880912 /* XSecurityUITests.xctest */,
 			);
@@ -191,6 +197,10 @@
 				6C1476BD235061F700F65E39 /* DetailViewController.m */,
 				6CFED92A2351C1BD00658B45 /* SelectImageViewController.h */,
 				6CFED92B2351C1BD00658B45 /* SelectImageViewController.m */,
+				6C6F609823570A5F0064A83D /* AppInfoTableViewController.h */,
+				6C6F609923570A5F0064A83D /* AppInfoTableViewController.m */,
+				6C6F609B235727E20064A83D /* AlertViewController.h */,
+				6C6F609C235727E20064A83D /* AlertViewController.m */,
 				6C288CBF2325F2AF00880912 /* Main.storyboard */,
 				6C288CC52325F2B000880912 /* Assets.xcassets */,
 				6C288CC72325F2B000880912 /* LaunchScreen.storyboard */,
@@ -249,7 +259,7 @@
 			);
 			name = XSecurity;
 			productName = XSecurity;
-			productReference = 6C288CB62325F2AF00880912 /* XSecurity.app */;
+			productReference = 6C288CB62325F2AF00880912 /* 密保.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6C288CD02325F2B000880912 /* XSecurityTests */ = {
@@ -390,6 +400,8 @@
 				6C1476B723502D7000F65E39 /* XTools.m in Sources */,
 				6CFED92C2351C1BD00658B45 /* SelectImageViewController.m in Sources */,
 				6C1476BE235061F700F65E39 /* DetailViewController.m in Sources */,
+				6C6F609D235727E20064A83D /* AlertViewController.m in Sources */,
+				6C6F609A23570A5F0064A83D /* AppInfoTableViewController.m in Sources */,
 				6C1476B423502B7F00F65E39 /* LeftViewController.m in Sources */,
 				6C1476BA23502F7600F65E39 /* UIColor+Hex.m in Sources */,
 				6C1476C62350650E00F65E39 /* XDataBaseManager.mm in Sources */,
@@ -576,8 +588,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "密保";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -595,8 +608,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "密保";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

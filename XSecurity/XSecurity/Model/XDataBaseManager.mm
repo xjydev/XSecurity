@@ -9,6 +9,7 @@
 
 #import "XDataBaseManager.h"
 #import "SecurityModel+WCTTableCoding.h"
+#import "XTools.h"
 
 static XDataBaseManager *_xManager = nil;
 
@@ -63,6 +64,8 @@ static XDataBaseManager *_xManager = nil;
             [user setInteger:model.securityId forKey:@"ksecurityid"];
             [user synchronize];
         }
+        model.passwordData = [XTOOLS encryptAes256WithStr:model.passWord Key:kENKEY];
+        model.passWord = nil;
         BOOL result = [self.dataBase insertOrReplaceObject:model into:KTableName];
         return result;
        }
@@ -70,6 +73,8 @@ static XDataBaseManager *_xManager = nil;
 }
 - (BOOL)updateSecurityModel:(SecurityModel *)model {
     if (self.dataBase) {
+        model.passwordData = [XTOOLS encryptAes256WithStr:model.passWord Key:kENKEY];
+        model.passWord = nil;
         BOOL result = [self.dataBase updateRowsInTable:KTableName onProperties:SecurityModel.AllProperties withObject:model where:SecurityModel.securityId == model.securityId];
         return result;
        }

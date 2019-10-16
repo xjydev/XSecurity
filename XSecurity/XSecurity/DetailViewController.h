@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailViewController : UIViewController
+@property (nonatomic, copy)void (^completeBack)(NSInteger status);
 @property (nonatomic, strong)SecurityModel *model;
 @end
 

@@ -21,10 +21,10 @@
 #define kpayend @"payendkey"
 #define kAdUnitId @"ca-app-pub-2119163618927307/2410199512"
 #define kBanderAdId @"ca-app-pub-2119163618927307/2059270754"
-#define kAppleId @"1469851328"
+#define kAppleId @"1483549556"
 //程序需要的主要三个颜色
 #define kGray1Color [UIColor ora_darkColorWithHex:0xf1f1f1 andAlpha:1];
-#define kMainCOLOR [UIColor ora_colorWithHex:0xFFD700]
+#define kMainCOLOR [UIColor ora_colorWithHex:0xFFb600]
 #define kBACKCOLOR [UIColor ora_colorWithHex:0x000000]
 #define kLINECOLOR [UIColor ora_colorWithHex:0xe5e5e5]
 #define kTEXTGRAY [UIColor ora_colorWithHex:0x999999]

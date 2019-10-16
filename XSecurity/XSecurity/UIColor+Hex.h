@@ -9,14 +9,15 @@
 
 @interface UIColor (ora_Hex)
 
-#define KColorF7F7F7
+#define kDarkCOLOR(color) [UIColor ora_darkColorWithHex:color andAlpha:1.0]
+#define kCOLOR(color,darkColor) [UIColor ora_colorWithHex:color darkHex:darkColor]
 
 //根据16进制颜色值和alpha值生成UIColor
 + (UIColor *)ora_colorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha;
-
++ (UIColor *)ora_darkColorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha;
 //根据16进制颜色值和alpha为1生成UIColor
 + (UIColor *)ora_colorWithHex:(UInt32)hex;
-+ (UIColor *)ora_darkColorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha;
++ (UIColor *)ora_colorWithHex:(UInt32)hex darkHex:(UInt32)darkHex;
 //根据16进制颜色字符串生成UIColor
 // hexString 支持格式为 OxAARRGGBB / 0xRRGGBB / #AARRGGBB / #RRGGBB / AARRGGBB / RRGGBB
 + (UIColor *)ora_colorWithHexString:(NSString *)hexString;

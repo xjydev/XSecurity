@@ -129,4 +129,7 @@ __LINE__, \
 - (NSString *)hmtimeStrFromDate:(NSDate *)date;
 - (BOOL)openURLStr:(NSString *)urlStr;
 - (UIViewController *)topViewController;
+
+- (NSData *)encryptAes256WithStr:(NSString *)str Key:(NSString *)key ;
+- (NSString *)decryptAes256WithData:(NSData *)decryptData Key:(NSString *)key;
 @end
