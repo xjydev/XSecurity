@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "XTools.h"
 #import "XDataBaseManager.h"
+#import "SafeView.h"
 
 @interface MainTableViewCell ()
 @property (nonatomic, strong)SecurityModel *model;
@@ -30,24 +31,43 @@
     [self.iconImageView setImage:[UIImage imageNamed:imagestr]];
     self.showButton.selected = NO;
     self.nameLabel.text = model.name;
-    if (_model.passWord.length == 0) {
-       self.contentLabel.text = [NSString stringWithFormat:@"%@:密码处于加密状态",model.account];
-    }
-    else {
-       self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",model.account,[self showPassword:self.showButton.selected]];
-    }
-   
+    self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",model.account,[self showPassword:self.showButton.selected]]; 
 }
 - (IBAction)showButtonAction:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    if (self.model.passWord.length == 0) {
-        self.model.passWord = [XTOOLS decryptAes256WithData:self.model.passwordData Key:kENKEY];
+    if (self.model.level > 0 && !sender.isSelected) {
+        if ([kUSerD objectForKey:KPassWord]) {
+            [SafeView defaultSafeView].type = PassWordTypeDefault;
+            [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
+                NSLog(@"num1 == %@",@(num));
+                if (num != 3) {//不是取消
+                  [self showPassWordWithButton:sender];
+                }
+            }];
+        }
+        else {
+            [XTOOLS showAlertTitle:@"无法验证，是否显示？" message:@"没有设置应用锁，无法二次验证。可去设置中打开应用锁，使用密码二次验证功能。" buttonTitles:@[@"取消",@"显示"] completionHandler:^(NSInteger num) {
+                if (num == 1) {
+                    [self showPassWordWithButton:sender];
+                }
+            }];
+        }
     }
-  self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",self.model.account,[self showPassword:self.showButton.selected]];
+    else {
+        [self showPassWordWithButton:sender];
+    }
 }
-
+- (void)showPassWordWithButton:(UIButton *)button {
+    button.selected = !button.selected;
+       if (self.model.passWord.length == 0) {
+           self.model.passWord = [XTOOLS decryptAes256WithData:self.model.passwordData Key:kENKEY];
+       }
+     self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",self.model.account,[self showPassword:self.showButton.selected]];
+}
 - (NSString *)showPassword:(BOOL)is {
     NSString *password = self.model.passWord;
+    if (password == nil) {
+        return  @"密码处于加密状态";
+    }
     NSMutableString *mstr = [NSMutableString stringWithString:password];
     if (!is) {
         mstr = [NSMutableString string];

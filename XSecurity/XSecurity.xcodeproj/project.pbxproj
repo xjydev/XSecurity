@@ -67,7 +67,7 @@
 		6C1476C52350650E00F65E39 /* XDataBaseManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = XDataBaseManager.mm; sourceTree = "<group>"; };
 		6C1476C723506B5A00F65E39 /* MainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		6C1476C823506B5A00F65E39 /* MainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
-		6C288CB62325F2AF00880912 /* 密保.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "密保.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C288CB62325F2AF00880912 /* 密码宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "密码宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C288CB92325F2AF00880912 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C288CBA2325F2AF00880912 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6C288CC02325F2AF00880912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 		6C288CB72325F2AF00880912 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C288CB62325F2AF00880912 /* 密保.app */,
+				6C288CB62325F2AF00880912 /* 密码宝.app */,
 				6C288CD12325F2B000880912 /* XSecurityTests.xctest */,
 				6C288CDC2325F2B000880912 /* XSecurityUITests.xctest */,
 			);
@@ -252,6 +252,7 @@
 				6C288CB22325F2AF00880912 /* Sources */,
 				6C288CB32325F2AF00880912 /* Frameworks */,
 				6C288CB42325F2AF00880912 /* Resources */,
+				1AE3959EF50F50A26023B4A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,7 +260,7 @@
 			);
 			name = XSecurity;
 			productName = XSecurity;
-			productReference = 6C288CB62325F2AF00880912 /* 密保.app */;
+			productReference = 6C288CB62325F2AF00880912 /* 密码宝.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6C288CD02325F2B000880912 /* XSecurityTests */ = {
@@ -368,6 +369,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1AE3959EF50F50A26023B4A0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-XSecurity/Pods-XSecurity-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XSecurity/Pods-XSecurity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		36CCA6CFF6898FBF368808CC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,6 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -588,9 +608,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
-				PRODUCT_NAME = "密保";
+				PRODUCT_NAME = "密码宝";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -601,6 +621,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -608,9 +629,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
-				PRODUCT_NAME = "密保";
+				PRODUCT_NAME = "密码宝";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -5,6 +5,6 @@ project './XSecurity.xcodeproj'
 target 'XSecurity' do
 
     pod 'WCDB'
-
+    pod 'IQKeyboardManager'
 end
 

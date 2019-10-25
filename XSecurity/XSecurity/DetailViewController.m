@@ -11,7 +11,9 @@
 #import "SecurityModel.h"
 #import "XDataBaseManager.h"
 #import "SelectImageViewController.h"
+#import "SafeView.h"
 @interface DetailViewController ()<UITextFieldDelegate,UIPopoverPresentationControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *iconButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *accountTextField;
@@ -24,7 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIView *complexView2;
 @property (weak, nonatomic) IBOutlet UIView *complexView3;
 @property (nonatomic,copy) NSString * iconStr;
+@property (weak, nonatomic) IBOutlet UISwitch *verifySwitch;
 
+@property (nonatomic, copy)NSString *passWorkStr;//密码的明码
 
 @end
 
@@ -45,18 +49,26 @@
     self.passwordTextField.leftView = [self createLeftLabellWithText:@"  密码:  "];
     self.passwordTextField.backgroundColor = kGray1Color;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordTextField.rightView = self.showButton;
+    self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
     
     self.remarkTextView.backgroundColor = kGray1Color;
     self.iconButton.backgroundColor = kGray1Color;
-//    self.passwordTextField.rightView = self.showButton;
-//    self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
+    
     
     if (self.model) {
         self.nameTextField.text = self.model.name;
         self.accountTextField.text = self.model.account;
-        self.passwordTextField.text = self.model.passWord;
+        self.passwordTextField.text = [self showPassword:self.showButton.selected];
         self.remarkTextView.text = self.model.remark;
         self.iconStr = self.model.icon;
+        self.verifySwitch.on = self.model.level;
+        if (self.model.passWord.length > 0) {
+            self.passWorkStr = self.model.passWord;
+        }
+    }
+    else {
+        self.showButton.selected = YES;
     }
     if (self.iconStr.length == 0) {
         self.iconStr = @"ximage_0";
@@ -73,9 +85,15 @@
     return label;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSMutableString *mstr = [[NSMutableString alloc]initWithString:textField.text];
-    [mstr replaceCharactersInRange:range withString:string];
-    [self judgePassWord:mstr];
+    if (textField == self.passwordTextField) {
+        NSMutableString *mstr = [[NSMutableString alloc]initWithString:textField.text];
+        [mstr replaceCharactersInRange:range withString:string];
+        [self judgePassWord:mstr];
+    }
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
     return YES;
 }
 - (IBAction)selectImageButtonAction:(UIButton *)sender {
@@ -97,6 +115,70 @@
     [self presentViewController:selectVC animated:YES completion:nil];
 
 }
+- (IBAction)verifySwitchAction:(UISwitch *)sender {
+    
+}
+- (IBAction)showButtonAction:(UIButton *)sender {
+    if (self.passwordTextField.text.length == 0) {
+        [XTOOLS showMessage:@"请输入密码"];
+        return;
+    }
+    if (sender.selected) {
+        self.passWorkStr = self.passwordTextField.text;
+    }
+    if (self.model.level > 0 && !sender.isSelected) {
+           if ([kUSerD objectForKey:KPassWord]) {
+               [SafeView defaultSafeView].type = PassWordTypeDefault;
+               [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
+                   NSLog(@"num1 == %@",@(num));
+                   if (num != 3) {//不是取消
+                     [self showPassWordWithButton:sender];
+                   }
+               }];
+           }
+           else {
+               [XTOOLS showAlertTitle:@"无法验证，是否显示？" message:@"没有设置应用锁，无法二次验证。可去设置中打开应用锁，使用密码二次验证功能。" buttonTitles:@[@"取消",@"显示"] completionHandler:^(NSInteger num) {
+                   if (num == 1) {
+                       [self showPassWordWithButton:sender];
+                   }
+               }];
+           }
+       }
+       else {
+           [self showPassWordWithButton:sender];
+       }
+}
+- (void)showPassWordWithButton:(UIButton *)button {
+    button.selected = !button.selected;
+       if (self.model.passWord.length == 0 && self.model.passwordData) {
+           self.passWorkStr = [XTOOLS decryptAes256WithData:self.model.passwordData Key:kENKEY];
+           self.model.passWord = self.passWorkStr;
+       }
+     self.passwordTextField.text =[self showPassword:self.showButton.selected];
+    [self judgePassWord:self.passwordTextField.text];
+}
+- (NSString *)showPassword:(BOOL)is {
+    NSString *password = self.passWorkStr;
+    if (password == nil) {
+        return @"密码处于加密状态";
+    }
+    NSMutableString *mstr = [NSMutableString stringWithString:password];
+    if (!is) {
+        mstr = [NSMutableString string];
+        while (mstr.length < password.length) {
+            [mstr appendFormat:@"*"];
+        }
+        NSInteger i = 1;
+        while ((i*4) < password.length) {
+            if ((i*4+(i-1)) < mstr.length) {
+             [mstr insertString:@" " atIndex:i*4+(i-1)];
+            }
+            i++;
+        }
+    }
+    
+    return mstr;
+}
 - (IBAction)saveButtonAction:(id)sender {
     if (self.nameTextField.text.length == 0) {
         [XTOOLS showMessage:@"请输入名称"];
@@ -112,10 +194,17 @@
             if (num == 1) {
                 self.model.name = self.nameTextField.text;
                 self.model.icon = self.iconStr;
-                self.model.passWord = self.passwordTextField.text;
+                if (self.showButton.selected) {//如果是可视的，就直接输入框。
+                  self.model.passWord = self.passwordTextField.text;
+                }
+                else {
+                    self.model.passWord = self.passWorkStr;
+                }
+                
                 self.model.account = self.accountTextField.text;
                 self.model.remark = self.remarkTextView.text;
                 self.model.modifyDate = [NSDate date];
+                self.model.level = self.verifySwitch.on;
              BOOL result = [[XDataBaseManager defaultManager]updateSecurityModel:self.model];
                 if (result) {
                     [XTOOLS showMessage:@"更新成功"];
@@ -136,9 +225,17 @@
                 SecurityModel *mo = [[SecurityModel alloc]init];
                 mo.name = self.nameTextField.text;
                 mo.icon = self.iconStr;
-                mo.passWord = self.passwordTextField.text;
+                
+                if (self.showButton.selected) {//如果是可视的，就直接输入框。
+                  mo.passWord = self.passwordTextField.text;
+                }
+                else {
+                    mo.passWord = self.passWorkStr;
+                }
+                
                 mo.account = self.accountTextField.text;
                 mo.remark = self.remarkTextView.text;
+                mo.level = self.verifySwitch.on;
                 mo.createDate = [NSDate date];
                 mo.modifyDate = [NSDate date];
                 NSLog(@"mo == %@",mo);

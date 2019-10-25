@@ -63,19 +63,23 @@
     NSDictionary *dict = self.mainArray[indexPath.section][indexPath.row];
     UIImageView *imageView = [cell.contentView viewWithTag:300];
     UILabel *titleLabel = [cell.contentView viewWithTag:301];
-    UISwitch *switchView = [cell viewWithTag:302];
-    [switchView addTarget:self action:@selector(switchValueChangeAction:) forControlEvents:UIControlEventValueChanged];
+    UISwitch *switchView = [cell.contentView viewWithTag:302];
+    
     titleLabel.text =dict[@"title"];
     [imageView setImage:[UIImage imageNamed:dict[@"image"]]];
     NSInteger vtag = [dict[@"vtag"]integerValue];
     if ( vtag >0) {
         switchView.hidden = NO;
-        switchView.tag =vtag;
         if (vtag == 400) {//
+            NSLog(@"touch == %@",@([kUSerD boolForKey:kTouchPassWord]));
           switchView.on = [kUSerD boolForKey:kTouchPassWord];
+            [switchView addTarget:self action:@selector(switchTouchValueChangeAction:) forControlEvents:UIControlEventValueChanged];
         }
         else if (vtag == 401) {
-           switchView.on = ((NSString *)[kUSerD objectForKey:KPassWord]).length>0;
+            NSString *pstr =(NSString *)[kUSerD objectForKey:KPassWord];
+           switchView.on = pstr.length>0;
+            [switchView addTarget:self action:@selector(switchPasswordValueChangeAction:) forControlEvents:UIControlEventValueChanged];
+            NSLog(@"pstr ==%@",pstr);
         }
     }
     else {
@@ -83,72 +87,73 @@
     }
     return cell;
 }
-- (void)switchValueChangeAction:(UISwitch *)switchView {
-    if (switchView.tag == 400) {
-        if (switchView.on) {
-            
-            if ([SafeView defaultSafeView].supportTouchID) {
-                if (![kUSerD objectForKey:KPassWord]) {
-                   [SafeView defaultSafeView].type = PassWordTypeSet;
-                }
-                else
-                {
-                    [SafeView defaultSafeView].type = PassWordTypeDefault;
-                }
-                [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
-                    if (num == 3) {
-                        switchView.on = NO;
-                    }
-                    else {
-                        [kUSerD setBool:YES forKey:kTouchPassWord];
-                        [kUSerD synchronize];
-                        [self.tableView reloadData];
-                    }
-                }];
+- (void)switchTouchValueChangeAction:(UISwitch *)switchView {
+    if (switchView.on) {
+        if ([SafeView defaultSafeView].supportTouchID) {
+            if (((NSString *)[kUSerD objectForKey:KPassWord]).length==0) {
+               [SafeView defaultSafeView].type = PassWordTypeSet;
             }
-            else
-            {
-                [XTOOLS showMessage:kDevice_Is_iPhoneX?@"设备不支持人脸解锁":@"设备不支持指纹解锁"];
-                switchView.on = NO;
+            else {
+                [SafeView defaultSafeView].type = PassWordTypeDefault;
             }
+            [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
+                NSLog(@"num1 == %@",@(num));
+                if (num == 3) {
+                    switchView.on = NO;
+                }
+                else {
+                    [kUSerD setBool:YES forKey:kTouchPassWord];
+                    [kUSerD synchronize];
+                    [self performSelector:@selector(refreshTableView) withObject:nil afterDelay:0.1];
+                }
+            }];
         }
         else
         {
-            [kUSerD removeObjectForKey:kTouchPassWord];
-            [kUSerD synchronize];
+            [XTOOLS showMessage:kDevice_Is_iPhoneX?@"设备不支持人脸解锁":@"设备不支持指纹解锁"];
+            switchView.on = NO;
         }
     }
     else
-        if (switchView.tag == 401) {
-          if (switchView.on) {
-                [SafeView defaultSafeView].type = PassWordTypeSet;
-                [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
-                    if (num == 3) {
-                        switchView.on = NO;
-                    }
-                    
-                }];
+    {
+        [kUSerD removeObjectForKey:kTouchPassWord];
+        [kUSerD synchronize];
+    }
+}
+- (void)switchPasswordValueChangeAction:(UISwitch *)switchView {
+    if (switchView.on) {
+        [SafeView defaultSafeView].type = PassWordTypeSet;
+        [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
+            if (num == 3) {
+                switchView.on = NO;
+                [self performSelector:@selector(refreshTableView) withObject:nil afterDelay:0.1];
             }
-            else
-            {
-                [SafeView defaultSafeView].type = PassWordTypeDefault;
-                [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
-                    NSLog(@"num == %@",@(num));
-                    if (num == 1) {
-                        [kUSerD removeObjectForKey:KPassWord];
-                        [kUSerD removeObjectForKey:kTouchPassWord];
-                        [kUSerD synchronize];
-                        [self.tableView reloadData];
-                    }
-                }];
-            }
-        }
+            
+        }];
+    }
+    else {
+        [SafeView defaultSafeView].type = PassWordTypeDefault;
+        [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
+            NSLog(@"num == %@",@(num));
+            
+            [kUSerD removeObjectForKey:KPassWord];
+            [kUSerD removeObjectForKey:kTouchPassWord];
+            [kUSerD synchronize];
+            [self performSelector:@selector(refreshTableView) withObject:nil afterDelay:0.1];
+            
+        }];
+    }
+}
+- (void)refreshTableView {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dict = self.mainArray[indexPath.section][indexPath.row];
     NSInteger tag = [dict[@"tag"]integerValue];
     if (tag == 3) {
-        if ([kUSerD objectForKey:KPassWord]) {
+        if (((NSString *)[kUSerD objectForKey:KPassWord]).length>0) {
            [SafeView defaultSafeView].type = PassWordTypeReset;
         }
         else {

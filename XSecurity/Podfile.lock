@@ -1,4 +1,5 @@
 PODS:
+  - IQKeyboardManager (6.5.0)
   - SQLiteRepairKit (1.2.2):
     - WCDBOptimizedSQLCipher (~> 1.2.0)
   - WCDB (1.0.7.5):
@@ -7,19 +8,22 @@ PODS:
   - WCDBOptimizedSQLCipher (1.2.1)
 
 DEPENDENCIES:
+  - IQKeyboardManager
   - WCDB
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - IQKeyboardManager
     - SQLiteRepairKit
     - WCDB
     - WCDBOptimizedSQLCipher
 
 SPEC CHECKSUMS:
+  IQKeyboardManager: 700e5155d6a292383b54e8678aec769e14fc78fc
   SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
   WCDB: 8e90babdeb7784c569353a4bd22a66c0a175a882
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 459c71e40143b7c8ce2457a1c4d4816dea57d3ec
+PODFILE CHECKSUM: 18459efa36b42570fad6ec9979ad5c240a602f68
 
 COCOAPODS: 1.5.3
