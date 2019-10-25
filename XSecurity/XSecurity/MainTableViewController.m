@@ -68,6 +68,7 @@
 
 @interface MainTableViewController ()
 @property (nonatomic, strong)NSArray *mainArray;
+@property (strong, nonatomic) IBOutlet UIView *noDataView;
 @end
 
 @implementation MainTableViewController
@@ -77,7 +78,6 @@
    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStyleDone target:self action:@selector(leftBarButtonItemAction)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add"] style:UIBarButtonItemStyleDone target:self action:@selector(addSecurityAction)];
-    self.tableView.tableFooterView = [[UIView alloc]init];
     [self refreshTableView];
     UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
     [refresh addTarget:self action:@selector(refreshPullUp:) forControlEvents:UIControlEventValueChanged];
@@ -110,6 +110,15 @@
 - (void)refreshTableView {
     self.mainArray = [[XDataBaseManager defaultManager]getAllSecurity];
     [self.tableView reloadData];
+    if (self.mainArray.count == 0) {
+        self.tableView.tableFooterView = self.noDataView;
+    }
+    else {
+        self.tableView.tableFooterView = [[UIView alloc]init];
+    }
+}
+- (IBAction)createSecurityButtonAction:(id)sender {
+    [self performSegueWithIdentifier:@"DetailViewController" sender:nil];
 }
 #pragma mark - Table view data source
 

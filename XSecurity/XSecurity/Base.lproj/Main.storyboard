@@ -93,11 +93,56 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="密保" id="JzF-gQ-c8a"/>
                     <connections>
+                        <outlet property="noDataView" destination="FfZ-ZG-vDD" id="jKg-ZK-Mwn"/>
                         <segue destination="Gdd-4l-ybq" kind="show" identifier="DetailViewController" id="xiv-9x-jhp"/>
                         <segue destination="3xC-ws-RPd" kind="showDetail" identifier="AlertViewController" id="nCA-jt-ut5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1v-wi-lLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="FfZ-ZG-vDD">
+                    <rect key="frame" x="0.0" y="0.0" width="369" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCy-gz-5yz">
+                            <rect key="frame" x="20" y="120" width="329" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="Aj7-tN-h7q"/>
+                            </constraints>
+                            <string key="text">还没有密码可供管理，
+你可以创建一个密码试试。</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="0.71372549019999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geG-BD-JdK">
+                            <rect key="frame" x="84.5" y="190" width="200" height="50"/>
+                            <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="7RQ-Cx-QyM"/>
+                                <constraint firstAttribute="width" constant="200" id="QdU-1p-NBb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                            <state key="normal" title="创建密码"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="createSecurityButtonAction:" destination="W00-Ur-YQc" eventType="touchUpInside" id="tk8-hg-uiD"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="geG-BD-JdK" firstAttribute="top" secondItem="aCy-gz-5yz" secondAttribute="bottom" constant="20" id="4XZ-Hc-Tus"/>
+                        <constraint firstItem="aCy-gz-5yz" firstAttribute="leading" secondItem="FfZ-ZG-vDD" secondAttribute="leading" constant="20" id="AZt-Gi-SgP"/>
+                        <constraint firstAttribute="trailing" secondItem="aCy-gz-5yz" secondAttribute="trailing" constant="20" id="Ih6-Fl-kLF"/>
+                        <constraint firstItem="aCy-gz-5yz" firstAttribute="top" secondItem="FfZ-ZG-vDD" secondAttribute="top" constant="120" id="bZ4-5I-zSR"/>
+                        <constraint firstItem="geG-BD-JdK" firstAttribute="centerX" secondItem="FfZ-ZG-vDD" secondAttribute="centerX" id="lvc-OU-jvY"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="lhM-PW-JEc"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="102.89855072463769" y="145.98214285714286"/>
         </scene>
@@ -207,6 +252,11 @@
                                 <state key="normal" title="保存">
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="saveButtonAction:" destination="Gdd-4l-ybq" eventType="touchUpInside" id="APh-wb-fF0"/>
                                 </connections>
@@ -303,7 +353,7 @@
                                                         <constraint firstAttribute="width" constant="100" id="t66-vZ-g6y"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" tag="302" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nqC-iM-VaN">
@@ -387,13 +437,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaD-Qv-N0E">
-                                <rect key="frame" x="20" y="728" width="374" height="60"/>
+                                <rect key="frame" x="20" y="738" width="374" height="50"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="zyf-1p-KoR"/>
+                                    <constraint firstAttribute="height" constant="50" id="zyf-1p-KoR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <state key="normal" title="确定"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="bottomButtonAction:" destination="3xC-ws-RPd" eventType="touchUpInside" id="m4C-ce-uHY"/>
                                 </connections>
