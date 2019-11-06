@@ -170,16 +170,33 @@
         [[XDataBaseManager defaultManager]deleteSecurityModel:model];
         [self refreshTableView];
         }];
-//    UITableViewRowAction *detailRoWAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"详情" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
-//        @strongify(self);
-//
-//    }];
-//    detailRoWAction.backgroundColor = [UIColor colorWithRed:0 green:124/255.0 blue:223/255.0 alpha:1];
     return @[deleteRoWAction];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     SecurityModel *model = self.mainArray[indexPath.row];
-    [self performSegueWithIdentifier:@"DetailViewController" sender:model];
+    MainTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (model.level > 0 && !cell.showButton.selected ) {
+       if ([kUSerD objectForKey:KPassWord]) {
+            [SafeView defaultSafeView].type = PassWordTypeDefault;
+            [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
+                NSLog(@"num1 == %@",@(num));
+                if (num != 3) {//不是取消
+                  [self performSegueWithIdentifier:@"DetailViewController" sender:model];
+                }
+            }];
+        }
+        else {
+            [XTOOLS showAlertTitle:@"无法验证，是否打开？" message:@"没有设置应用锁，无法二次验证。可去设置中打开应用锁，使用密码二次验证功能。" buttonTitles:@[@"取消",@"打开"] completionHandler:^(NSInteger num) {
+                if (num == 1) {
+                    [self performSegueWithIdentifier:@"DetailViewController" sender:model];
+                }
+            }];
+        }
+    }
+    else {
+       [self performSegueWithIdentifier:@"DetailViewController" sender:model];
+    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"DetailViewController"]) {

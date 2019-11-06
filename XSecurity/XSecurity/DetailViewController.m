@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *verifySwitch;
 
 @property (nonatomic, copy)NSString *passWorkStr;//密码的明码
-
+@property (nonatomic, assign)BOOL canEdit;
 @end
 
 @implementation DetailViewController
@@ -56,7 +56,10 @@
     self.iconButton.backgroundColor = kGray1Color;
     
     
-    if (self.model) {
+    if (self.model) {//编辑
+        self.title = @"详情";
+        self.canEdit = NO;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑Z" style:UIBarButtonItemStyleDone target:self action:@selector(editBarButtonAction:)];
         self.nameTextField.text = self.model.name;
         self.accountTextField.text = self.model.account;
         self.passwordTextField.text = [self showPassword:self.showButton.selected];
@@ -68,13 +71,25 @@
         }
     }
     else {
+        self.title = @"添加";
         self.showButton.selected = YES;
+        self.canEdit = YES;
     }
     if (self.iconStr.length == 0) {
         self.iconStr = @"ximage_0";
     }
     [self.iconButton setImage:[UIImage imageNamed:self.iconStr] forState:UIControlStateNormal];
     [self judgePassWord:self.passwordTextField.text];
+}
+- (void)editBarButtonAction:(UIBarButtonItem *)bar {
+    if (self.canEdit) {
+        [self saveButtonAction:nil];
+    }
+    else {
+        self.canEdit = YES;
+        [bar setTitle:@"完成"];
+    }
+    
 }
 - (UILabel *)createLeftLabellWithText:(NSString *)text {
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 44)];
@@ -83,6 +98,9 @@
     label.textColor = kDarkCOLOR(0x000000);
     label.textAlignment = NSTextAlignmentCenter;
     return label;
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return self.canEdit;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == self.passwordTextField) {
@@ -126,27 +144,8 @@
     if (sender.selected) {
         self.passWorkStr = self.passwordTextField.text;
     }
-    if (self.model.level > 0 && !sender.isSelected) {
-           if ([kUSerD objectForKey:KPassWord]) {
-               [SafeView defaultSafeView].type = PassWordTypeDefault;
-               [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
-                   NSLog(@"num1 == %@",@(num));
-                   if (num != 3) {//不是取消
-                     [self showPassWordWithButton:sender];
-                   }
-               }];
-           }
-           else {
-               [XTOOLS showAlertTitle:@"无法验证，是否显示？" message:@"没有设置应用锁，无法二次验证。可去设置中打开应用锁，使用密码二次验证功能。" buttonTitles:@[@"取消",@"显示"] completionHandler:^(NSInteger num) {
-                   if (num == 1) {
-                       [self showPassWordWithButton:sender];
-                   }
-               }];
-           }
-       }
-       else {
-           [self showPassWordWithButton:sender];
-       }
+    [self showPassWordWithButton:sender];
+       
 }
 - (void)showPassWordWithButton:(UIButton *)button {
     button.selected = !button.selected;
