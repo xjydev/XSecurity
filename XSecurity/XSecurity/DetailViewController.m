@@ -12,14 +12,15 @@
 #import "XDataBaseManager.h"
 #import "SelectImageViewController.h"
 #import "SafeView.h"
-@interface DetailViewController ()<UITextFieldDelegate,UIPopoverPresentationControllerDelegate>
+@interface DetailViewController ()<UITextFieldDelegate,UIPopoverPresentationControllerDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *iconButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *accountTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *showButton;
-@property (weak, nonatomic) IBOutlet UITextView *remarkTextView;
+@property (strong, nonatomic) UITextView *remarkTextView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *complexLabel;
 @property (weak, nonatomic) IBOutlet UIView *complexView1;
@@ -27,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *complexView3;
 @property (nonatomic,copy) NSString * iconStr;
 @property (weak, nonatomic) IBOutlet UISwitch *verifySwitch;
+@property (weak, nonatomic) IBOutlet UILabel *editTimeLabel;
 
 @property (nonatomic, copy)NSString *passWorkStr;//密码的明码
 @property (nonatomic, assign)BOOL canEdit;
@@ -54,12 +56,14 @@
     
     self.remarkTextView.backgroundColor = kGray1Color;
     self.iconButton.backgroundColor = kGray1Color;
-    
+    [self.backScrollView addSubview:self.remarkTextView];
     
     if (self.model) {//编辑
-        self.title = @"详情";
+        self.title = @"密码详情";
         self.canEdit = NO;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑Z" style:UIBarButtonItemStyleDone target:self action:@selector(editBarButtonAction:)];
+        self.saveButton.hidden = YES;
+        [self.saveButton setTitle:@"更新" forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStyleDone target:self action:@selector(editBarButtonAction:)];
         self.nameTextField.text = self.model.name;
         self.accountTextField.text = self.model.account;
         self.passwordTextField.text = [self showPassword:self.showButton.selected];
@@ -69,9 +73,14 @@
         if (self.model.passWord.length > 0) {
             self.passWorkStr = self.model.passWord;
         }
+        if (self.model.modifyDate) {
+            self.editTimeLabel.text = [NSString stringWithFormat:@"上次修改：%@",[XTOOLS timeStrFromDate:self.model.modifyDate]];
+        }
     }
     else {
-        self.title = @"添加";
+        self.title = @"添加密码";
+        [self.saveButton setTitle:@"添加" forState:UIControlStateNormal];
+        self.saveButton.hidden = NO;
         self.showButton.selected = YES;
         self.canEdit = YES;
     }
@@ -81,6 +90,16 @@
     [self.iconButton setImage:[UIImage imageNamed:self.iconStr] forState:UIControlStateNormal];
     [self judgePassWord:self.passwordTextField.text];
 }
+- (UITextView *)remarkTextView {
+    if (!_remarkTextView) {
+        _remarkTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 415, kScreen_Width - 40, 100)];
+        _remarkTextView.backgroundColor = kCOLOR(0x7676801e, 0x7676803d);
+        _remarkTextView.font = [UIFont systemFontOfSize:17];
+        _remarkTextView.textColor = kDarkCOLOR(0x000000);
+        _remarkTextView.delegate = self;
+    }
+    return _remarkTextView;
+}
 - (void)editBarButtonAction:(UIBarButtonItem *)bar {
     if (self.canEdit) {
         [self saveButtonAction:nil];
@@ -88,8 +107,9 @@
     else {
         self.canEdit = YES;
         [bar setTitle:@"完成"];
+        self.title = @"编辑详情";
+        self.saveButton.hidden = NO;
     }
-    
 }
 - (UILabel *)createLeftLabellWithText:(NSString *)text {
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 44)];
@@ -100,6 +120,9 @@
     return label;
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (!self.canEdit) {
+        [XTOOLS showMessage:@"点击右上角开始编辑"];
+    }
     return self.canEdit;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -114,6 +137,13 @@
     [textField resignFirstResponder];
     return YES;
 }
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if (!self.canEdit) {
+           [XTOOLS showMessage:@"点击右上角开始编辑"];
+       }
+    return self.canEdit;
+}
+
 - (IBAction)selectImageButtonAction:(UIButton *)sender {
     SelectImageViewController *selectVC = [[SelectImageViewController alloc]init]; 
     selectVC.modalPresentationStyle = UIModalPresentationPopover;
