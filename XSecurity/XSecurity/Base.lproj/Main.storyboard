@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--密保-->
+        <!--密码宝-->
         <scene sceneID="xxK-E7-O3i">
             <objects>
                 <tableViewController storyboardIdentifier="MainTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W00-Ur-YQc" customClass="MainTableViewController" sceneMemberID="viewController">
@@ -91,7 +91,7 @@
                             <outlet property="delegate" destination="W00-Ur-YQc" id="MEz-Hu-NUl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="密保" id="JzF-gQ-c8a"/>
+                    <navigationItem key="navigationItem" title="密码宝" id="JzF-gQ-c8a"/>
                     <connections>
                         <outlet property="noDataView" destination="FfZ-ZG-vDD" id="jKg-ZK-Mwn"/>
                         <segue destination="Gdd-4l-ybq" kind="show" identifier="DetailViewController" id="xiv-9x-jhp"/>

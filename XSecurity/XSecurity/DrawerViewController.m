@@ -151,7 +151,7 @@
         NSArray *sendToPerson = @[@"xiaodeve@163.com"];
         [mailVC setToRecipients:sendToPerson];
         //  主题
-        [mailVC setSubject:@"《密保》意见反馈"];
+        [mailVC setSubject:@"《密码宝》意见反馈"];
         [self presentViewController:mailVC animated:YES completion:nil];
         [mailVC setMessageBody:@"填写您想要反馈的问题……" isHTML:NO];
     }else{

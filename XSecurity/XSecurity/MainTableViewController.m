@@ -86,9 +86,13 @@
 }
 @end
 
-@interface MainTableViewController ()
+@interface MainTableViewController ()<UISearchControllerDelegate,UISearchResultsUpdating>
 @property (nonatomic, strong)NSArray *mainArray;
+@property (nonatomic, strong)NSMutableArray *searchArray;
 @property (strong, nonatomic) IBOutlet UIView *noDataView;
+@property (nonatomic, strong) UILabel *searchFootLabel;
+@property (nonatomic, strong)UISearchController *searchController;
+
 @end
 
 @implementation MainTableViewController
@@ -107,6 +111,27 @@
         [self.tableView addSubview:refresh];
     }
     [self performSelector:@selector(showAlert) withObject:nil afterDelay:0.5];
+    self.searchArray = [NSMutableArray arrayWithCapacity:0];
+    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+    self.searchController.delegate= self;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.barTintColor = kCOLOR(0xf1f1f1, 0x222222);
+    self.searchController.searchBar.tintColor = kMainCOLOR;
+    self.searchController.searchBar.placeholder= @"请输入标题/账号";
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext=YES;
+}
+- (UILabel *)searchFootLabel {
+    if (!_searchFootLabel) {
+        _searchFootLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 200)];
+        _searchFootLabel.textAlignment = NSTextAlignmentCenter;
+        _searchFootLabel.text = @"请搜索密码“名称”和“账号”";
+        _searchFootLabel.font = [UIFont systemFontOfSize:18];
+        _searchFootLabel.textColor = [UIColor lightGrayColor];
+    }
+    return _searchFootLabel;
 }
 - (void)showAlert {
    if (self.mainArray.count == 0) {
@@ -143,19 +168,28 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.mainArray.count;
+    if (self.searchController.active) {
+        return self.searchArray.count;
+    }
+    else {
+       return self.mainArray.count;
+    }
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mainCellId" forIndexPath:indexPath];
-    SecurityModel *model = self.mainArray[indexPath.row];
-    cell.model = model;
+    if (self.searchController.active) {
+        SecurityModel *model = self.searchArray[indexPath.row];
+        cell.model = model;
+    }
+    else {
+        SecurityModel *model = self.mainArray[indexPath.row];
+        cell.model = model;
+    }
     return cell;
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -163,18 +197,39 @@
 }
 -(NSArray *)tableView:(UITableView* )tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SecurityModel *model = self.mainArray[indexPath.row];
+    SecurityModel *model = nil;
+    if (self.searchController.active) {
+        model = self.searchArray[indexPath.row];
+    }
+    else {
+        model =self.mainArray[indexPath.row];
+    }
+    
     @weakify(self)
     UITableViewRowAction *deleteRoWAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
         @strongify(self);
         [[XDataBaseManager defaultManager]deleteSecurityModel:model];
-        [self refreshTableView];
+        if (self.searchController.active) {
+            if ([self.searchArray containsObject:model]) {
+                [self.searchArray removeObject:model];
+                [self.tableView reloadData];
+            }
+        }
+        else {
+           [self refreshTableView];
+        }
         }];
     return @[deleteRoWAction];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SecurityModel *model = self.mainArray[indexPath.row];
+   SecurityModel *model = nil;
+    if (self.searchController.active) {
+        model = self.searchArray[indexPath.row];
+    }
+    else {
+        model =self.mainArray[indexPath.row];
+    }
     MainTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (model.level > 0 && !cell.showButton.selected ) {
        if ([kUSerD objectForKey:KPassWord]) {
@@ -211,5 +266,36 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+#pragma mark -- search
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchString = [self.searchController.searchBar text];
+    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchString];
+    [self.searchArray removeAllObjects];
+    for (SecurityModel *mo in self.mainArray) {
+        if ([preicate evaluateWithObject:mo.name] || [preicate evaluateWithObject:mo.account]) {
+            [self.searchArray addObject:mo];
+        }
+    }
+    if (self.searchArray.count == 0) {
+        self.tableView.tableFooterView = self.searchFootLabel;
+    }
+    else {
+        self.tableView.tableFooterView = [[UIView alloc]init];
+    }
+    [self.tableView reloadData];
+}
+
+- (void)willDismissSearchController:(UISearchController *)searchController
+{
+    [self refreshTableView];
+}
+- (void)didDismissSearchController:(UISearchController *)searchController {
+   if (self.mainArray.count == 0) {
+        self.tableView.tableFooterView = self.noDataView;
+    }
+    else {
+        self.tableView.tableFooterView = [[UIView alloc]init];
+    }
 }
 @end

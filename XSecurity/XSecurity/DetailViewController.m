@@ -76,6 +76,9 @@
         if (self.model.modifyDate) {
             self.editTimeLabel.text = [NSString stringWithFormat:@"上次修改：%@",[XTOOLS timeStrFromDate:self.model.modifyDate]];
         }
+        else {
+            self.editTimeLabel.text = @"";
+        }
     }
     else {
         self.title = @"添加密码";
@@ -83,6 +86,7 @@
         self.saveButton.hidden = NO;
         self.showButton.selected = YES;
         self.canEdit = YES;
+        self.editTimeLabel.text = @"";
     }
     if (self.iconStr.length == 0) {
         self.iconStr = @"ximage_0";

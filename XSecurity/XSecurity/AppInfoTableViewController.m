@@ -26,7 +26,7 @@
     [self reloadAppInformationDetail];
 }
 - (void)reloadAppInformationDetail {
-    self.mainArray = @[@[@{@"title":@"应用名称",@"detail":@"密保"}],
+    self.mainArray = @[@[@{@"title":@"应用名称",@"detail":@"密码宝"}],
                        @[@{@"title":@"应用版本",@"detail":APP_CURRENT_VERSION},
                          @{@"title":@"应用作者",@"detail":@"JingYuan Xiao"},
                          @{@"title":@"应用声明",@"detail":@"如果涉及侵权行为，请联系作者"},

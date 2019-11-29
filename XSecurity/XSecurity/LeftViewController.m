@@ -128,7 +128,11 @@
                 switchView.on = NO;
                 [self performSelector:@selector(refreshTableView) withObject:nil afterDelay:0.1];
             }
-            
+            else {
+                [XTOOLS showAlertTitle:@"请牢记密码" message:@"应用不包括用户注册，不存储用户信息,请牢记解锁密码，遗忘将无法找回！" buttonTitles:@[@"知道了"] completionHandler:^(NSInteger num) {
+                    
+                }];
+            }
         }];
     }
     else {

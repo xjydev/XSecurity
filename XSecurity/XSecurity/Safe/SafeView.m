@@ -53,7 +53,7 @@ static SafeView *_safeView = nil;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = kDarkCOLOR(0xffffff);
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(orientationChangeAction) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
@@ -150,7 +150,7 @@ static SafeView *_safeView = nil;
     }
     else
     {
-        [XTOOLS showAlertTitle:@"无法找回" message:@"因为您没有设置文件加密默认密码，应用不包括用户注册，不存储用户信息,解锁密码无法找回！" buttonTitles:@[@"知道了"] completionHandler:^(NSInteger num) {
+        [XTOOLS showAlertTitle:@"无法找回" message:@"因为应用不包括用户注册，不存储用户信息,解锁密码无法找回！" buttonTitles:@[@"知道了"] completionHandler:^(NSInteger num) {
             
         }];
     }
@@ -329,6 +329,7 @@ static SafeView *_safeView = nil;
         _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, kScreen_Width, 60)];
         _titleLabel.font = [UIFont boldSystemFontOfSize:17];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.textColor = kDarkCOLOR(0x000000);
         [self addSubview:_titleLabel];
         
     }
@@ -338,7 +339,7 @@ static SafeView *_safeView = nil;
     }
     else
     {
-        self->_titleLabel.textColor = [UIColor blackColor];
+        self->_titleLabel.textColor = kDarkCOLOR(0x000000);
     }
         self->_titleLabel.text = title;
     });

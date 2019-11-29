@@ -600,7 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -608,7 +608,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -621,7 +621,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -629,7 +629,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
 				TARGETED_DEVICE_FAMILY = "1,2";
