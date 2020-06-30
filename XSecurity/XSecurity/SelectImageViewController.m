@@ -19,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.mainCollectionView];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(EnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+}
+- (void)EnterBackground {
+  [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (UICollectionView *)mainCollectionView {
     if (!_mainCollectionView) {
@@ -60,6 +64,8 @@
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 @end

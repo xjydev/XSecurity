@@ -10,6 +10,7 @@
 #import <StoreKit/StoreKit.h>
 #import <MessageUI/MessageUI.h>
 #import "AppInfoTableViewController.h"
+#import "IconViewController.h"
 #import "XTools.h"
 
 @interface DrawerViewController ()<MFMailComposeViewControllerDelegate>
@@ -135,6 +136,19 @@
         case 6://反馈
         {
             [self gotoSendMail];
+        }
+            break;
+        case 7://伪装
+        {
+            if (@available(iOS 10.3, *)) {
+                IconViewController *VC = [self.mainVC.storyboard instantiateViewControllerWithIdentifier:@"IconViewController"];
+                [Nav presentViewController:VC animated:YES completion:nil];              
+            }
+            else {
+                [XTOOLS showAlertTitle:@"系统版本必须10.3以上，才支持此功能" message:nil buttonTitles:@[@"确定"] completionHandler:^(NSInteger num) {
+                    
+                }];
+            }
         }
             break;
         default:
