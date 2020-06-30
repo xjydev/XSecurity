@@ -27,16 +27,17 @@
                     [XTOOLS showMessage:@"设置失败"];
                 }
                 else {
-//                   [XTOOLS showMessage:@"设置成功"];
+                   [XTOOLS showMessage:@"设置成功"];
+                    [self performSelector:@selector(dismissVC) withObject:nil afterDelay:1];
                 }
             }];
         } else {
-            [XTOOLS showMessage:@"设置失败"];
+            [XTOOLS showMessage:@"不支持设置"];
         }
     } else {
-       [XTOOLS showMessage:@"设置失败"];
+       [XTOOLS showMessage:@"系统版本太低，设置失败"];
     }
-    [self performSelector:@selector(dismissVC) withObject:nil afterDelay:0.5];
+    
 }
 - (IBAction)cancelButtonAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -46,23 +47,24 @@
         if ([[UIApplication sharedApplication]supportsAlternateIcons]) {
             [[UIApplication sharedApplication]setAlternateIconName:nil completionHandler:^(NSError * _Nullable error) {
                 if (!error) {
-//                  [XTOOLS showMessage:@"图标已还原"];
+                    [XTOOLS showMessage:@"图标已还原"];
+                    [self performSelector:@selector(dismissVC) withObject:nil afterDelay:1];
                 }
                 else {
                     [XTOOLS showMessage:@"还原失败"];
                 }
             }];
         } else {
-            [XTOOLS showMessage:@"还原失败"];
+            [XTOOLS showMessage:@"不支持还原"];
         }
     } else {
-        [XTOOLS showMessage:@"还原失败"];
+        [XTOOLS showMessage:@"系统版本太低，还原失败"];
     }
     
-    [self performSelector:@selector(dismissVC) withObject:nil afterDelay:0.5];
+    
 }
 - (void)dismissVC {
-//   [self dismissViewControllerAnimated:YES completion:nil];
+   [self dismissViewControllerAnimated:YES completion:nil];
 }
 /*
 #pragma mark - Navigation

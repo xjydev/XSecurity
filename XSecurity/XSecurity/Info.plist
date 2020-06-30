@@ -128,16 +128,128 @@
 			<key>UIPrerenderedIcon</key>
 			<false/>
 		</dict>
-		<key>UINewsstandIcon</key>
+	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>icon1</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon1</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon10</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon10</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon11</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon11</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon12</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon12</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon2</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon2</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon3</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon3</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon4</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon4</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon5</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon6</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon6</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon7</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon7</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon8</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon8</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>icon9</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon9</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+		<key>CFBundlePrimaryIcon</key>
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string></string>
 			</array>
-			<key>UINewsstandBindingEdge</key>
-			<string>UINewsstandBindingEdgeLeft</string>
-			<key>UINewsstandBindingType</key>
-			<string>UINewsstandBindingTypeMagazine</string>
+			<key>UIPrerenderedIcon</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
@@ -168,6 +280,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
