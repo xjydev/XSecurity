@@ -470,6 +470,17 @@ POSSIBILITY OF SUCH DAMAGE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright 2011 - 2019 umeng.com. All rights reserved.
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>UMCCommon</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Tencent is pleased to support the open source community by making WCDB available.  
 
 Copyright (C) 2017 THL A29 Limited, a Tencent company.  All rights reserved.

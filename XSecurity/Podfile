@@ -6,5 +6,7 @@ target 'XSecurity' do
 
     pod 'WCDB'
     pod 'IQKeyboardManager'
+    pod 'UMCCommon'
+    
 end
 

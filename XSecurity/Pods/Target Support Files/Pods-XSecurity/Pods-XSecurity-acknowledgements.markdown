@@ -445,6 +445,11 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 
 
+## UMCCommon
+
+Copyright 2011 - 2019 umeng.com. All rights reserved.
+
+
 ## WCDB
 
 Tencent is pleased to support the open source community by making WCDB available.  

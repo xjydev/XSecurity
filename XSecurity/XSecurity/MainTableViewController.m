@@ -153,7 +153,17 @@
     [rc endRefreshing];
 }
 - (void)refreshTableView {
-    self.mainArray = [[XDataBaseManager defaultManager]getAllSecurity];
+   NSArray *dataArray  = [[XDataBaseManager defaultManager]getAllSecurity];
+    self.mainArray = [dataArray sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(SecurityModel *  _Nonnull obj1, SecurityModel *  _Nonnull obj2) {
+        if (obj1.top > obj2.top) {
+            return NSOrderedDescending;
+        }
+        else if(obj1.top == obj2.top){
+            return [obj1.modifyDate compare:obj2.modifyDate];
+        }
+        return NSOrderedSame;
+        
+    }];
     [self.tableView reloadData];
     if (self.mainArray.count == 0) {
         self.tableView.tableFooterView = self.noDataView;
@@ -204,22 +214,54 @@
     else {
         model =self.mainArray[indexPath.row];
     }
-    
     @weakify(self)
     UITableViewRowAction *deleteRoWAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
-        @strongify(self);
-        [[XDataBaseManager defaultManager]deleteSecurityModel:model];
-        if (self.searchController.active) {
-            if ([self.searchArray containsObject:model]) {
-                [self.searchArray removeObject:model];
-                [self.tableView reloadData];
+        NSString *message = [NSString stringWithFormat:@"确认删除‘%@’？删除将无法恢复。",model.name];
+        [XTOOLS showAlertTitle:@"确认删除" message:message buttonTitles:@[@"取消",@"删除"] completionHandler:^(NSInteger num) {
+            @strongify(self);
+            if (num == 1) {
+                [self deleteModel:model];
             }
-        }
-        else {
-           [self refreshTableView];
-        }
         }];
-    return @[deleteRoWAction];
+    }];
+    NSString *topTitle = model.top == 1? @"取消置顶":@"置顶";
+    UITableViewRowAction *topAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:topTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        @strongify(self);
+        [self makeTopModel:model];
+    }];
+    topAction.backgroundColor = [UIColor blueColor];
+    return @[deleteRoWAction,topAction];
+}
+- (void)makeTopModel:(SecurityModel *)model {
+    NSString *msg = nil;
+    if (model.top == 1) {
+        model.top = 0;
+        msg = @"取消置顶失败";
+    }
+    else {
+        model.top = 1;
+        msg = @"置顶失败";
+    }
+    BOOL ret = [[XDataBaseManager defaultManager]updateSecurityModel:model];
+    if (ret) {
+        [self refreshTableView];
+    }
+    else {
+        [XTOOLS showMessage:msg];
+    }
+}
+- (void)deleteModel:(SecurityModel *)model {
+    
+    [[XDataBaseManager defaultManager]deleteSecurityModel:model];
+    if (self.searchController.active) {
+        if ([self.searchArray containsObject:model]) {
+            [self.searchArray removeObject:model];
+            [self.tableView reloadData];
+        }
+    }
+    else {
+       [self refreshTableView];
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

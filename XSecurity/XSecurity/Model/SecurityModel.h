@@ -19,5 +19,7 @@
 @property (nonatomic, strong) NSDate     *modifyDate;//修改时间
 @property (nonatomic, assign) NSInteger   level;//安全等级
 @property  (nonatomic, assign)NSInteger   securityId;//密码id
+@property (nonatomic, assign)NSInteger type;//密码分类。
+@property (nonatomic, assign)NSInteger top;//置顶。
 @end
 

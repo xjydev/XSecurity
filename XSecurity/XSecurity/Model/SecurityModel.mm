@@ -23,6 +23,9 @@ WCDB_SYNTHESIZE(SecurityModel, modifyDate)
 WCDB_SYNTHESIZE(SecurityModel, level)
 WCDB_SYNTHESIZE(SecurityModel, securityId)
 
+WCDB_SYNTHESIZE(SecurityModel, type)
+WCDB_SYNTHESIZE(SecurityModel, top)
+
 WCDB_PRIMARY(SecurityModel, securityId)
 
 WCDB_INDEX(SecurityModel, "_index", securityId)

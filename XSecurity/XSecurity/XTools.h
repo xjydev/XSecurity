@@ -132,4 +132,11 @@ __LINE__, \
 
 - (NSData *)encryptAes256WithStr:(NSString *)str Key:(NSString *)key ;
 - (NSString *)decryptAes256WithData:(NSData *)decryptData Key:(NSString *)key;
+
+#pragma mark -- 打码统计
+- (void)umClickEvent:(NSString *)event;
+- (void)umClickEvent:(NSString *)event label:(NSString *)label;
+- (void)beginPage:(NSString *)page;
+- (void)endPage:(NSString *)page;
+
 @end

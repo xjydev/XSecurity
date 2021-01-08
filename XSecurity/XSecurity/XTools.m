@@ -13,6 +13,8 @@
 #import <StoreKit/StoreKit.h>
 #include "sys/stat.h"
 
+#import <UMCommon/MobClick.h>
+
 static XTools *tools = nil;
 
 @interface XTools()
@@ -457,5 +459,18 @@ static XTools *tools = nil;
     else {
        return [UIApplication sharedApplication].keyWindow.rootViewController;
     }
+}
+
+- (void)umClickEvent:(NSString *)event {
+    [MobClick event:event];
+}
+- (void)umClickEvent:(NSString *)event label:(NSString *)label {
+    [MobClick event:event label:label];
+}
+- (void)beginPage:(NSString *)page {
+    [MobClick beginLogPageView:page];
+}
+- (void)endPage:(NSString *)page {
+    [MobClick endLogPageView:page];
 }
 @end

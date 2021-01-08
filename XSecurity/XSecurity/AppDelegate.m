@@ -10,6 +10,8 @@
 #import "LeftViewController.h"
 #import "DrawerViewController.h"
 #import "SafeView.h"
+#import <UMCommon/UMCommon.h>
+#define UMAppKey @"5ff825046a2a470e8f717307"
 @interface AppDelegate ()
 @property (nonatomic, strong)UINavigationController *mainNav;
 @end
@@ -18,6 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [UMConfigure initWithAppkey:UMAppKey channel:@"App Store"];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     UIStoryboard *mainStoryB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
