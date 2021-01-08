@@ -73,8 +73,10 @@ static XDataBaseManager *_xManager = nil;
 }
 - (BOOL)updateSecurityModel:(SecurityModel *)model {
     if (self.dataBase) {
-        model.passwordData = [XTOOLS encryptAes256WithStr:model.passWord Key:kENKEY];
-        model.passWord = nil;
+        if (model.passWord != nil) {
+            model.passwordData = [XTOOLS encryptAes256WithStr:model.passWord Key:kENKEY];
+            model.passWord = nil;
+        }
         BOOL result = [self.dataBase updateRowsInTable:KTableName onProperties:SecurityModel.AllProperties withObject:model where:SecurityModel.securityId == model.securityId];
         return result;
        }

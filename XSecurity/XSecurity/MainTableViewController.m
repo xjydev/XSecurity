@@ -156,6 +156,9 @@
    NSArray *dataArray  = [[XDataBaseManager defaultManager]getAllSecurity];
     self.mainArray = [dataArray sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(SecurityModel *  _Nonnull obj1, SecurityModel *  _Nonnull obj2) {
         if (obj1.top > obj2.top) {
+            return NSOrderedAscending;
+        }
+        else if (obj1.top < obj2.top) {
             return NSOrderedDescending;
         }
         else if(obj1.top == obj2.top){
