@@ -339,11 +339,11 @@
 		E41C633C25AAFBDF00CBBCD7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E41C633D25AAFBDF00CBBCD7 /* LeftViewController.h */,
-				E41C633E25AAFBDF00CBBCD7 /* DrawerViewController.m */,
-				E41C633F25AAFBDF00CBBCD7 /* MainTableViewController.h */,
-				E41C634025AAFBDF00CBBCD7 /* LeftViewController.m */,
 				E41C634125AAFBDF00CBBCD7 /* DrawerViewController.h */,
+				E41C633E25AAFBDF00CBBCD7 /* DrawerViewController.m */,
+				E41C633D25AAFBDF00CBBCD7 /* LeftViewController.h */,
+				E41C634025AAFBDF00CBBCD7 /* LeftViewController.m */,
+				E41C633F25AAFBDF00CBBCD7 /* MainTableViewController.h */,
 				E41C634225AAFBDF00CBBCD7 /* MainTableViewController.m */,
 			);
 			path = Main;
@@ -742,7 +742,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -750,7 +750,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -763,7 +763,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -771,7 +771,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
 				TARGETED_DEVICE_FAMILY = "1,2";

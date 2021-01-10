@@ -16,6 +16,7 @@
 @interface MainTableViewCell ()
 @property (nonatomic, strong)SecurityModel *model;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *topImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIButton *showButton;
@@ -31,6 +32,7 @@
     [self.iconImageView setImage:[UIImage imageNamed:imagestr]];
     self.showButton.selected = NO;
     self.nameLabel.text = model.name;
+    self.topImageView.hidden = (model.top != 1);
     self.contentLabel.text = [NSString stringWithFormat:@"%@:%@",model.account,[self showPassword:self.showButton.selected]]; 
 }
 - (IBAction)showButtonAction:(UIButton *)sender {
