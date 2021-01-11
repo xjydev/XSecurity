@@ -1,1 +1,0 @@
-../../../../UMCCommon/UMCommon_7.2.4/UMDevice.framework/Headers/UMDevice.h

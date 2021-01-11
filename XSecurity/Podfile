@@ -4,9 +4,9 @@ platform :ios, '9.0'
 project './XSecurity.xcodeproj'
 target 'XSecurity' do
 
-    pod 'WCDB'
-    pod 'IQKeyboardManager'
-    pod 'UMCCommon'
+#    pod 'WCDB'
+#    pod 'IQKeyboardManager'
+#    pod 'UMCCommon'
     
 end
 
