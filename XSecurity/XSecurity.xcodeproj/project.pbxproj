@@ -146,6 +146,7 @@
 		E41C634225AAFBDF00CBBCD7 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		E41C634A25AAFBE800CBBCD7 /* AppInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInfoTableViewController.m; sourceTree = "<group>"; };
 		E41C634B25AAFBE800CBBCD7 /* AppInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoTableViewController.h; sourceTree = "<group>"; };
+		E46DAAB225ADA3E800E9F170 /* 密码宝Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "密码宝Release.entitlements"; sourceTree = "<group>"; };
 		E6365F7350329D9DAAB957EB /* libPods-XSecurity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XSecurity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -229,6 +230,7 @@
 		6C288CB82325F2AF00880912 /* XSecurity */ = {
 			isa = PBXGroup;
 			children = (
+				E46DAAB225ADA3E800E9F170 /* 密码宝Release.entitlements */,
 				6C288CB92325F2AF00880912 /* AppDelegate.h */,
 				6C288CBA2325F2AF00880912 /* AppDelegate.m */,
 				6C288CC52325F2B000880912 /* Assets.xcassets */,
@@ -722,9 +724,11 @@
 			baseConfigurationReference = DB84FEABC76DD9DDB7E5ED6A /* Pods-XSecurity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -734,6 +738,7 @@
 				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
+				PROVISIONING_PROFILE_SPECIFIER = XSecurityDevProfile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -743,9 +748,12 @@
 			baseConfigurationReference = 7B92FBB0BA644CE45B91B32D /* Pods-XSecurity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "XSecurity/密码宝Release.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = XSecurity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -755,6 +763,7 @@
 				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
+				PROVISIONING_PROFILE_SPECIFIER = XSecurityDisProfile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
