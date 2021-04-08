@@ -253,38 +253,34 @@
         }];
     }
     else {
-        [XTOOLS showAlertTitle:@"确认保存？" message:nil buttonTitles:@[@"取消",@"确认"] completionHandler:^(NSInteger num) {
-            if (num == 1) {
-                SecurityModel *mo = [[SecurityModel alloc]init];
-                mo.name = self.nameTextField.text;
-                mo.icon = self.iconStr;
-                
-                if (self.showButton.selected) {//如果是可视的，就直接输入框。
-                  mo.passWord = self.passwordTextField.text;
-                }
-                else {
-                    mo.passWord = self.passWorkStr;
-                }
-                
-                mo.account = self.accountTextField.text;
-                mo.remark = self.remarkTextView.text;
-                mo.level = self.verifySwitch.on;
-                mo.createDate = [NSDate date];
-                mo.modifyDate = [NSDate date];
-                NSLog(@"mo == %@",mo);
-                BOOL result = [[XDataBaseManager defaultManager]saveSecurityModel:mo];
-                if (result) {
-                    if (self.completeBack) {
-                        self.completeBack(1);
-                    }
-                    [XTOOLS showMessage:@"保存成功"];
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-                else {
-                    [XTOOLS showMessage:@"保存失败"];
-                }
+        SecurityModel *mo = [[SecurityModel alloc]init];
+        mo.name = self.nameTextField.text;
+        mo.icon = self.iconStr;
+        
+        if (self.showButton.selected) {//如果是可视的，就直接输入框。
+            mo.passWord = self.passwordTextField.text;
+        }
+        else {
+            mo.passWord = self.passWorkStr;
+        }
+        
+        mo.account = self.accountTextField.text;
+        mo.remark = self.remarkTextView.text;
+        mo.level = self.verifySwitch.on;
+        mo.createDate = [NSDate date];
+        mo.modifyDate = [NSDate date];
+        NSLog(@"mo == %@",mo);
+        BOOL result = [[XDataBaseManager defaultManager]saveSecurityModel:mo];
+        if (result) {
+            if (self.completeBack) {
+                self.completeBack(1);
             }
-        }];
+            [XTOOLS showMessage:@"保存成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            [XTOOLS showMessage:@"保存失败"];
+        } 
     }
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
