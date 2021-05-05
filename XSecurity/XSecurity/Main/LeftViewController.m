@@ -25,7 +25,7 @@
     self.view.backgroundColor = kMainCOLOR;
     NSString *images0 = kDevice_Is_iPhoneX?@"left_0":@"left_01";
     NSString *names0 = kDevice_Is_iPhoneX?@"人脸解锁":@"指纹解锁";
-    self.mainArray =@[@[@{@"image":images0,@"title":names0,@"tag":@(1),@"vtag":@"400"},@{@"image":@"left_06",@"title":@"手势解锁",@"tag":@(2),@"vtag":@"401"},@{@"image":@"left_02",@"title":@"重置解锁",@"tag":@(3),@"vtag":@"0"},@{@"image":@"left_07",@"title":@"伪装图标",@"tag":@(7),@"vtag":@"0"}],@[@{@"image":@"left_03",@"title":@"关于应用",@"tag":@(4),@"vtag":@"0"},@{@"image":@"left_04",@"title":@"应用好评",@"tag":@(5),@"vtag":@"0"},@{@"image":@"left_05",@"title":@"意见反馈",@"tag":@(6),@"vtag":@"0"},],];
+    self.mainArray =@[@[@{@"image":images0,@"title":names0,@"tag":@(1),@"vtag":@"400"},@{@"image":@"left_06",@"title":@"手势解锁",@"tag":@(2),@"vtag":@"401"},@{@"image":@"left_02",@"title":@"重置解锁",@"tag":@(3),@"vtag":@"0"},@{@"image":@"left_07",@"title":@"伪装图标",@"tag":@(7),@"vtag":@"0"},@{@"image":@"left_08",@"title":@"生成密码",@"tag":@(8),@"vtag":@"0"}],@[@{@"image":@"left_03",@"title":@"关于应用",@"tag":@(4),@"vtag":@"0"},@{@"image":@"left_04",@"title":@"应用好评",@"tag":@(5),@"vtag":@"0"},@{@"image":@"left_05",@"title":@"意见反馈",@"tag":@(6),@"vtag":@"0"},],];
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 64)];
     [headerView addSubview:self.sizeLabel];
     self.tableView.tableHeaderView = headerView;

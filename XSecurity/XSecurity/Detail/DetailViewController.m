@@ -11,6 +11,7 @@
 #import "SecurityModel.h"
 #import "XDataBaseManager.h"
 #import "SelectImageViewController.h"
+#import "CreatePWViewController.h"
 #import "SafeView.h"
 @interface DetailViewController ()<UITextFieldDelegate,UIPopoverPresentationControllerDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
@@ -41,17 +42,26 @@
     [self setUpViews];
 }
 - (void)setUpViews {
-    self.nameTextField.leftView = [self createLeftLabellWithText:@"  名称:  "];
+    self.nameTextField.leftView = [self createLeftLabellWithText:@"名称:"];
     self.nameTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.nameTextField.rightViewMode =UITextFieldViewModeAlways;
+    self.nameTextField.rightView = [self createCopyButtonWithTag:201];
     self.nameTextField.backgroundColor = kGray1Color;
-    self.accountTextField.leftView = [self createLeftLabellWithText:@"  账号:  "];
+    
+    self.accountTextField.leftView = [self createLeftLabellWithText:@"账号:"];
     self.accountTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.accountTextField.rightViewMode =UITextFieldViewModeAlways;
+    self.accountTextField.rightView = [self createCopyButtonWithTag:202];
     self.accountTextField.backgroundColor = kGray1Color;
     
-    self.passwordTextField.leftView = [self createLeftLabellWithText:@"  密码:  "];
+    self.passwordTextField.leftView = [self createLeftLabellWithText:@"密码:"];
     self.passwordTextField.backgroundColor = kGray1Color;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.passwordTextField.rightView = self.showButton;
+    UIView *pView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 88, 44)];
+    self.showButton.frame = CGRectMake(44, 0, 44, 44);
+    [pView addSubview:self.showButton];
+    [pView addSubview:[self createCopyButtonWithTag:203]];
+    self.passwordTextField.rightView = pView;
     self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
     
     self.remarkTextView.backgroundColor = kGray1Color;
@@ -96,7 +106,7 @@
 }
 - (UITextView *)remarkTextView {
     if (!_remarkTextView) {
-        _remarkTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 415, kScreen_Width - 40, 100)];
+        _remarkTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 431, kScreen_Width - 40, 100)];
         _remarkTextView.backgroundColor = kCOLOR(0x7676801e, 0x7676803d);
         _remarkTextView.font = [UIFont systemFontOfSize:17];
         _remarkTextView.textColor = kDarkCOLOR(0x000000);
@@ -115,13 +125,46 @@
         self.saveButton.hidden = NO;
     }
 }
-- (UILabel *)createLeftLabellWithText:(NSString *)text {
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 44)];
+- (UIView *)createLeftLabellWithText:(NSString *)text {
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 44)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 44)];
     label.text = text;
     label.font = [UIFont systemFontOfSize:17];
     label.textColor = kDarkCOLOR(0x000000);
     label.textAlignment = NSTextAlignmentCenter;
-    return label;
+    [view addSubview:label];
+    return view;
+}
+- (UIView *)createCopyButtonWithTag:(NSInteger)tag {
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = view.bounds;
+    [button setImage:[UIImage imageNamed:@"copy"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(copyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    button.tag = tag;
+    [view addSubview:button];
+    return view;
+}
+- (void)copyButtonAction:(UIButton *)button {
+    if (button.tag == 201) {//名称
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.nameTextField.text;
+        [XTOOLS showMessage:@"复制成功"];
+    }
+    else if (button.tag == 202){//账号
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.accountTextField.text;
+        [XTOOLS showMessage:@"复制成功"];
+    }
+    else if (button.tag == 203) {//密码
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        NSString *pst =self.model.passWord;
+        if (pst.length == 0 && self.model.passwordData) {
+            pst = [XTOOLS decryptAes256WithData:self.model.passwordData Key:kENKEY];
+        }
+        pasteboard.string = pst;
+        [XTOOLS showMessage:@"复制成功"];
+    }
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (!self.canEdit) {
@@ -151,6 +194,7 @@
 - (IBAction)selectImageButtonAction:(UIButton *)sender {
     if (!self.canEdit) {
         [XTOOLS showMessage:@"点击右上角开始编辑"];
+        return;
     }
     SelectImageViewController *selectVC = [[SelectImageViewController alloc]init]; 
     selectVC.modalPresentationStyle = UIModalPresentationPopover;
@@ -169,6 +213,22 @@
     };
     [self presentViewController:selectVC animated:YES completion:nil];
 
+}
+- (IBAction)createPasswordButton:(UIButton *)sender {
+    if (!self.canEdit) {
+        [XTOOLS showMessage:@"点击右上角开始编辑"];
+        return;
+    }
+    CreatePWViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePWViewController"];
+    vc.createComplete = ^(NSString * _Nonnull pwStr) {
+        self.passwordTextField.text = pwStr;
+        [self judgePassWord:self.passwordTextField.text];
+        self.passWorkStr = pwStr;
+    };
+    
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 - (IBAction)verifySwitchAction:(UISwitch *)sender {
     if (!self.canEdit) {

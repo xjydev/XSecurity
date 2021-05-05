@@ -12,7 +12,7 @@
 #import "AppInfoTableViewController.h"
 #import "IconViewController.h"
 #import "XTools.h"
-
+#import "CreatePWViewController.h"
 @interface DrawerViewController ()<MFMailComposeViewControllerDelegate>
 {
     
@@ -149,6 +149,15 @@
                     
                 }];
             }
+        }
+            break;
+        case 8://生成密码
+        {
+            CreatePWViewController *createVC = [self.mainVC.storyboard instantiateViewControllerWithIdentifier:@"CreatePWViewController"];
+            
+            [Nav presentViewController:createVC animated:YES completion:^{
+                
+            }];
         }
             break;
         default:

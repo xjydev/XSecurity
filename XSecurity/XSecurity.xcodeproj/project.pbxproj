@@ -17,6 +17,7 @@
 		6C288CCC2325F2B000880912 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CCB2325F2B000880912 /* main.m */; };
 		6C288CD62325F2B000880912 /* XSecurityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CD52325F2B000880912 /* XSecurityTests.m */; };
 		6C288CE12325F2B000880912 /* XSecurityUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C288CE02325F2B000880912 /* XSecurityUITests.m */; };
+		6C8E67D92642839500739FD1 /* CreatePWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E67D82642839500739FD1 /* CreatePWViewController.m */; };
 		6CFED9342351E1DC00658B45 /* SafeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED92F2351E1DC00658B45 /* SafeView.m */; };
 		6CFED9352351E1DC00658B45 /* CLLockItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED9302351E1DC00658B45 /* CLLockItemView.m */; };
 		6CFED9362351E1DC00658B45 /* CoreLockConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFED9312351E1DC00658B45 /* CoreLockConst.m */; };
@@ -93,6 +94,8 @@
 		6C288CDC2325F2B000880912 /* XSecurityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XSecurityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C288CE02325F2B000880912 /* XSecurityUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XSecurityUITests.m; sourceTree = "<group>"; };
 		6C288CE22325F2B000880912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C8E67D72642839500739FD1 /* CreatePWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreatePWViewController.h; sourceTree = "<group>"; };
+		6C8E67D82642839500739FD1 /* CreatePWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatePWViewController.m; sourceTree = "<group>"; };
 		6CFED92E2351E1DC00658B45 /* CoreLockConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLockConst.h; sourceTree = "<group>"; };
 		6CFED92F2351E1DC00658B45 /* SafeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafeView.m; sourceTree = "<group>"; };
 		6CFED9302351E1DC00658B45 /* CLLockItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockItemView.m; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 				E41C62EF25AAFBC900CBBCD7 /* DetailViewController.m */,
 				E41C62F025AAFBC900CBBCD7 /* IconViewController.h */,
 				E41C62EE25AAFBC900CBBCD7 /* IconViewController.m */,
+				6C8E67D72642839500739FD1 /* CreatePWViewController.h */,
+				6C8E67D82642839500739FD1 /* CreatePWViewController.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -539,6 +544,7 @@
 				E41C634525AAFBDF00CBBCD7 /* MainTableViewController.m in Sources */,
 				6C288CCC2325F2B000880912 /* main.m in Sources */,
 				E41C630125AAFBD000CBBCD7 /* UIColor+Hex.m in Sources */,
+				6C8E67D92642839500739FD1 /* CreatePWViewController.m in Sources */,
 				6C1476C12350623F00F65E39 /* SecurityModel.mm in Sources */,
 				E41C62F325AAFBC900CBBCD7 /* DetailViewController.m in Sources */,
 				E41C634C25AAFBE800CBBCD7 /* AppInfoTableViewController.m in Sources */,
@@ -726,7 +732,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = XSecurity/Info.plist;
@@ -735,7 +741,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
 				PROVISIONING_PROFILE_SPECIFIER = XSecurityDevProfile;
@@ -751,7 +757,7 @@
 				CODE_SIGN_ENTITLEMENTS = "XSecurity/密码宝Release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = Q494Q8N6JY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = XSecurity/Info.plist;
@@ -760,7 +766,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.xiaodev.XSecurity;
 				PRODUCT_NAME = "密码宝";
 				PROVISIONING_PROFILE_SPECIFIER = XSecurityDisProfile;
