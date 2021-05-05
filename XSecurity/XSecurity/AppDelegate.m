@@ -22,7 +22,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [UMConfigure initWithAppkey:UMAppKey channel:@"App Store"];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
     UIStoryboard *mainStoryB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LeftViewController *leftVC = [mainStoryB instantiateViewControllerWithIdentifier:@"LeftViewController"];
     self.mainNav = [mainStoryB instantiateViewControllerWithIdentifier:@"MainNav"];

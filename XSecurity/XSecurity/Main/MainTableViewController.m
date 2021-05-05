@@ -101,7 +101,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    self.tableView.backgroundColor = kDarkCOLOR(0xf6f6f6);
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStyleDone target:self action:@selector(leftBarButtonItemAction)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add"] style:UIBarButtonItemStyleDone target:self action:@selector(addSecurityAction)];
     [self refreshTableView];
@@ -155,20 +155,22 @@
     [rc endRefreshing];
 }
 - (void)refreshTableView {
-   NSArray *dataArray  = [[XDataBaseManager defaultManager]getAllSecurity];
-    self.mainArray = [dataArray sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(SecurityModel *  _Nonnull obj1, SecurityModel *  _Nonnull obj2) {
-        if (obj1.top > obj2.top) {
-            return NSOrderedAscending;
-        }
-        else if (obj1.top < obj2.top) {
-            return NSOrderedDescending;
-        }
-        else if(obj1.top == obj2.top){
-            return [obj1.modifyDate compare:obj2.modifyDate];
-        }
-        return NSOrderedSame;
-        
+   NSMutableArray *dataArray  =[NSMutableArray arrayWithArray:[[XDataBaseManager defaultManager]getAllSecurity]];
+    NSMutableArray *descrArr = [NSMutableArray array];
+    NSSortDescriptor *des = [NSSortDescriptor sortDescriptorWithKey:@"top" ascending:NO];
+    [descrArr addObject:des];
+    
+    NSSortDescriptor* des2 = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:1 comparator:^NSComparisonResult(NSString*  _Nonnull obj1, NSString*  _Nonnull obj2) {
+        return [obj1 compare:obj2 options:NSWidthInsensitiveSearch|NSNumericSearch];
     }];
+    [descrArr addObject:des2];
+    
+    NSSortDescriptor *des1 = [NSSortDescriptor sortDescriptorWithKey:@"modifyDate" ascending:NO];
+    [descrArr addObject:des1];
+    
+    [dataArray sortUsingDescriptors:descrArr];
+    self.mainArray = dataArray;
+
     [self.tableView reloadData];
     if (self.mainArray.count == 0) {
         self.tableView.tableFooterView = self.noDataView;

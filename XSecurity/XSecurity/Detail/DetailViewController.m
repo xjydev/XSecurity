@@ -202,7 +202,7 @@
     selectVC.popoverPresentationController.sourceRect = sender.bounds;
     selectVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     selectVC.popoverPresentationController.delegate = self;
-    selectVC.popoverPresentationController.backgroundColor = [UIColor whiteColor];
+    selectVC.popoverPresentationController.backgroundColor = kDarkCOLOR(0xf3f3f3);
     selectVC.preferredContentSize = CGSizeMake(250, 250);
     @weakify(self);
     selectVC.selectedBack = ^(NSInteger index) {
