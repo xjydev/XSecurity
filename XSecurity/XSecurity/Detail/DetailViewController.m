@@ -149,6 +149,9 @@
 }
 
 - (IBAction)selectImageButtonAction:(UIButton *)sender {
+    if (!self.canEdit) {
+        [XTOOLS showMessage:@"点击右上角开始编辑"];
+    }
     SelectImageViewController *selectVC = [[SelectImageViewController alloc]init]; 
     selectVC.modalPresentationStyle = UIModalPresentationPopover;
     selectVC.popoverPresentationController.sourceView = sender;
@@ -168,7 +171,35 @@
 
 }
 - (IBAction)verifySwitchAction:(UISwitch *)sender {
+    if (!self.canEdit) {
+        [XTOOLS showMessage:@"点击右上角开始编辑"];
+        sender.on = self.model.level;
+    }
+    else if (sender.on == 1 && ![kUSerD objectForKey:KPassWord]) {//没有设置应用锁
+        [XTOOLS showAlertTitle:@"是否设置应用锁？" message:@"设置应用锁，才能使用二次验证。" buttonTitles:@[@"取消",@"设置"] completionHandler:^(NSInteger num) {
+            if (num == 1) {
+                [self setPasswordWithSwitch:sender];
+            }
+            else {
+                sender.on = NO;
+            }
+        }];
+    }
     
+}
+- (void)setPasswordWithSwitch:(UISwitch *)switchView {
+    [SafeView defaultSafeView].type = PassWordTypeSet;
+    [[SafeView defaultSafeView] showSafeViewHandle:^(NSInteger num) {
+        if (num == 3) {
+            switchView.on = NO;
+            [XTOOLS showMessage:@"设置失败"];
+        }
+        else {
+            [XTOOLS showAlertTitle:@"请牢记密码" message:@"应用不包括用户注册，不存储用户信息,请牢记解锁密码，遗忘将无法找回！" buttonTitles:@[@"知道了"] completionHandler:^(NSInteger num) {
+                [kNOtificationC postNotificationName:@"leftvcRefresh" object:nil];
+            }];
+        }
+    }];
 }
 - (IBAction)showButtonAction:(UIButton *)sender {
     if (self.passwordTextField.text.length == 0) {
@@ -269,7 +300,6 @@
         mo.level = self.verifySwitch.on;
         mo.createDate = [NSDate date];
         mo.modifyDate = [NSDate date];
-        NSLog(@"mo == %@",mo);
         BOOL result = [[XDataBaseManager defaultManager]saveSecurityModel:mo];
         if (result) {
             if (self.completeBack) {

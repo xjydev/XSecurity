@@ -220,6 +220,26 @@
         model =self.mainArray[indexPath.row];
     }
     @weakify(self)
+    UITableViewRowAction *copyRoWAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"复制密码" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
+        MainTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (model.level > 0 && !cell.showButton.selected) {//需要二次验证，必须显示。
+            [XTOOLS showAlertTitle:@"请先验证解密密码" message:@"二次验证的密码，需要先解密才可以复制。" buttonTitles:@[@"取消",@"解密"] completionHandler:^(NSInteger num) {
+                if (num == 1) {
+                    [cell showButtonAction:cell.showButton];
+                }
+            }];
+        }
+        else {
+            if (model.passWord.length == 0) {
+                model.passWord = [XTOOLS decryptAes256WithData:model.passwordData Key:kENKEY];
+            }
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = model.passWord;
+            [XTOOLS showMessage:@"复制成功"];
+        }
+    }];
+    copyRoWAction.backgroundColor = kMainCOLOR;
+    
     UITableViewRowAction *deleteRoWAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
         NSString *message = [NSString stringWithFormat:@"确认删除‘%@’？删除将无法恢复。",model.name];
         [XTOOLS showAlertTitle:@"确认删除" message:message buttonTitles:@[@"取消",@"删除"] completionHandler:^(NSInteger num) {
@@ -235,7 +255,7 @@
         [self makeTopModel:model];
     }];
     topAction.backgroundColor = [UIColor blueColor];
-    return @[deleteRoWAction,topAction];
+    return @[copyRoWAction,topAction,deleteRoWAction];
 }
 - (void)makeTopModel:(SecurityModel *)model {
     NSString *msg = nil;
@@ -255,6 +275,7 @@
         [XTOOLS showMessage:msg];
     }
 }
+
 - (void)deleteModel:(SecurityModel *)model {
     
     [[XDataBaseManager defaultManager]deleteSecurityModel:model];

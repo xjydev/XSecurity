@@ -283,10 +283,10 @@
 		E41C62ED25AAFBC900CBBCD7 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				E41C62EE25AAFBC900CBBCD7 /* IconViewController.m */,
+				E41C62F125AAFBC900CBBCD7 /* DetailViewController.h */,
 				E41C62EF25AAFBC900CBBCD7 /* DetailViewController.m */,
 				E41C62F025AAFBC900CBBCD7 /* IconViewController.h */,
-				E41C62F125AAFBC900CBBCD7 /* DetailViewController.h */,
+				E41C62EE25AAFBC900CBBCD7 /* IconViewController.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";

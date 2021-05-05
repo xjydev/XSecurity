@@ -31,8 +31,11 @@
     self.tableView.tableHeaderView = headerView;
     self.tableView.tableFooterView = [[UIView alloc]init];
     self.tableView.backgroundColor = kMainCOLOR;
+    [kNOtificationC addObserver:self selector:@selector(refresh) name:@"leftvcRefresh" object:nil];
 }
-
+- (void)refresh {
+    [self.tableView reloadData];
+}
 - (UILabel *)sizeLabel {
     if (!_sizeLabel) {
         _sizeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 20, 230, 80)];
