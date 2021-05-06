@@ -112,7 +112,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1v-wi-lLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="FfZ-ZG-vDD">
-                    <rect key="frame" x="0.0" y="0.0" width="369" height="300"/>
+                    <rect key="frame" x="0.0" y="0.0" width="369" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCy-gz-5yz">
@@ -867,7 +867,6 @@
         <!--CreatePW View Controller-->
         <scene sceneID="im0-7L-qFe">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5O-UR-36w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="CreatePWViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ols-cK-Fik" customClass="CreatePWViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V5N-DE-eEj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -1106,6 +1105,7 @@
                         <outlet property="upperButton" destination="zzc-Xo-tsJ" id="Gat-rQ-srA"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5O-UR-36w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-604.34782608695662" y="837.72321428571422"/>
         </scene>

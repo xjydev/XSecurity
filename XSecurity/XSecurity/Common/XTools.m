@@ -97,13 +97,14 @@ static XTools *tools = nil;
 
 - (void)showMessage:(NSString *)title {
     dispatch_async(dispatch_get_main_queue(), ^{
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hiddAlertLabel) object:nil];
-    self.alertLabel.bounds = CGRectMake(0, 0, 16*title.length+30, 40);
-    self.alertLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, CGRectGetHeight([UIScreen mainScreen].bounds)/2);
-    self.alertLabel.hidden = NO;
-    self.alertLabel.text = title;
-    [self performSelector:@selector(hiddAlertLabel) withObject:nil afterDelay:title.length * 0.2];
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hiddAlertLabel) object:nil];
+        self.alertLabel.bounds = CGRectMake(0, 0, 16*title.length+30, 40);
+        self.alertLabel.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, CGRectGetHeight([UIScreen mainScreen].bounds)/2);
+        self.alertLabel.hidden = NO;
+        self.alertLabel.text = title;
+        [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.alertLabel];
+        [self performSelector:@selector(hiddAlertLabel) withObject:nil afterDelay:title.length * 0.2];
     });
     
 }
